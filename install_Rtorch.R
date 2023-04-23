@@ -1,4 +1,4 @@
-# install R torch
+# install R torch since 2023/04/23
 install.packages(c("pak", "pkgdepends", "pkgcache"))
 pak::pak("r-lib/devtools")
 # x install.packages("devtools")
