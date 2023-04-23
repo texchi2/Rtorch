@@ -1,4 +1,5 @@
 # install R torch since 2023/04/23
+# as https://github.com/texchi2/Rtorch.git
 install.packages(c("pak", "pkgdepends", "pkgcache"))
 pak::pak("r-lib/devtools")
 # x install.packages("devtools")
