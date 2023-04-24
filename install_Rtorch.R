@@ -1,6 +1,6 @@
 # install R torch since 2023/04/23
 # as https://github.com/texchi2/Rtorch.git
-# git@github.com:texchi2/Rtorch.git
+# $ git remote add origin git@github.com:texchi2/Rtorch.git (ok) 2023/04/24
 
 install.packages(c("pak", "pkgdepends", "pkgcache"))
 pak::pak("r-lib/devtools")
