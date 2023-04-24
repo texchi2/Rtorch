@@ -16,7 +16,7 @@ Sys.setenv(LANTERN_URL="~/lantern-0.10.0+cu117+x86_64-Linux.zip")
 
 # or
 devtools::install_local("~/libtorch-cxx11-abi-shared-with-deps-1.13.1%2Bcu117.zip")
-devtools::install_local("~/lantern-0.10.0.9000+cu117+x86_64-Linux.zip")
+devtools::install_local("~/lantern-0.10.0+cu117+x86_64-Linux.zip")
 
 # x torch::install_torch()
 
