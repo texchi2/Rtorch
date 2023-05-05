@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # using hash bang to execute $ python3 merge_tiles.py
-
+# run python under R reticulate package
 # merge by pyvips =>
 #*** pip3 install pyvips
 #*** sudo apt install libvips
@@ -11,9 +11,18 @@
 
 # a list in python: https://www.askpython.com/python/list/iterate-through-list-in-python
 import pyvips
+import os
+files = os.listdir('/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/') #insert folder path
 
+structured_files = {}
+for file in files:
+#    name, date, sample, environment = file.split('_')
+    re.split("- ", file)
+    structured_files.append({'TH_id':name, 'Region':region, 'Number':number})
+    
         # tiles = [pyvips.Image.new_from_file(f"{x}_{y}.jpeg", access="sequential")
 #                 for y in range(height) for x in range(width)] 
+# string process https://stackoverflow.com/questions/71214436/how-to-extract-data-from-a-filename-in-python-convert-file-name-to-string
 
 TH_id = "TH2123220"  #"TH2113193"
 regions = ["008", "009", "010", "012"] #, "005", "006"]
@@ -22,8 +31,9 @@ regions = ["008", "009", "010", "012"] #, "005", "006"]
 tiles = [pyvips.Image.new_from_file(f"{TH_id}-Region {y}.tif", access="sequential") for y in regions] 
 print([f"{TH_id}-Region {y}.tif" for y in regions])  
 
+# HE, CK13
 image = pyvips.Image.arrayjoin(tiles, across= len(regions), background=255) # white
-image.write_to_file(f"../{TH_id}_HE.tif", compression="deflate", tile=True)
+image.write_to_file(f"../{TH_id}_CK13.tif", compression="deflate", tile=True)
 #"jpeg", tile=True)
 # lzw or deflate by Adobe
 
