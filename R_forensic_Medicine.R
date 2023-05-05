@@ -10,12 +10,13 @@
 library(sf)
 library(mapview)
 
-# Create a data frame with the coordinates of the universities
+# Create a data frame with the coordinates of the universities; 
 universities <- data.frame(
-  name = c("Queen Mary University of London", "Monash University"),
-  lat = c(51.5246, -37.9105),
-  lon = c(-0.0393, 145.1340)
-)
+  name = c("Queen Mary University of London", "Monash University", "University of Hargeisa", "Taipei Medical University"),
+  lat = c(51.5246, -37.9105, 9.5818, 25.0002),
+  lon = c(-0.0393, 145.1340, 44.0316, 121.5581)
+  )
+
 
 # Convert data frame to an sf object
 universities_sf <- st_as_sf(universities, coords = c("lon", "lat"), crs = 4326)
