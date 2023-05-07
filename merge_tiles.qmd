@@ -5,37 +5,51 @@
 #*** pip3 install pyvips
 #*** sudo apt install libvips
 
+```{python}
 #merge_tiles.py
 # goal:
 # TH2113193-Region 001.tif, TH2113193-Region 002.tif => TH2113193_HE.tif
 
 # a list in python: https://www.askpython.com/python/list/iterate-through-list-in-python
+# chatGPT prompt: please update my python code to do: 1) read TH*.tif filename in folder to produce list of structured_files with TH_id and regions variables. one example filename is "TH2123220-Region 008.tif", so TH_id should be extracted as "TH2123220", and regions should be "008". please update my code
 import pyvips
 import os
-files = os.listdir('/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/') #insert folder path
+import re
 
-structured_files = {}
+files = os.listdir('/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/') #insert folder path
+structured_files = []
+
 for file in files:
-#    name, date, sample, environment = file.split('_')
-    re.split("- ", file)
-    structured_files.append({'TH_id':name, 'Region':region, 'Number':number})
+    if file.endswith('.tif') and file.startswith('TH'):
+        split_file = re.split("-| ", file)
+        TH_id = split_file[0]
+        region = split_file[-1].split('.')[0]
+        structured_files.append({'TH_id': TH_id, 'regions': region})
+
+print(structured_files)
     
         # tiles = [pyvips.Image.new_from_file(f"{x}_{y}.jpeg", access="sequential")
 #                 for y in range(height) for x in range(width)] 
 # string process https://stackoverflow.com/questions/71214436/how-to-extract-data-from-a-filename-in-python-convert-file-name-to-string
 
-TH_id = "TH2123220"  #"TH2113193"
-regions = ["008", "009", "010", "012"] #, "005", "006"]
+#TH_id = "TH2123220"  #"TH2113193"
+#regions = ["008", "009", "010", "012"] #, "005", "006"]
 
 
 tiles = [pyvips.Image.new_from_file(f"{TH_id}-Region {y}.tif", access="sequential") for y in regions] 
 print([f"{TH_id}-Region {y}.tif" for y in regions])  
 
 # HE, CK13
+stains = "CK13"
 image = pyvips.Image.arrayjoin(tiles, across= len(regions), background=255) # white
-image.write_to_file(f"../{TH_id}_CK13.tif", compression="deflate", tile=True)
+image.write_to_file(f"../{TH_id}_{stains}.tif", compression="deflate", tile=True)
 #"jpeg", tile=True)
 # lzw or deflate by Adobe
+
+```
+```{r}
+
+```
 
 #TIFF (Tagged Image File Format) is a file format for storing images. TIFF files support multiple "pages" or images as well as a variety of storage formats and compression methods. One of these storage formats is called the Tiled TIFF storage format.
 
