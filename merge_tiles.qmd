@@ -1,9 +1,25 @@
 #!/usr/bin/env python3
 # using hash bang to execute $ python3 merge_tiles.py
 # run python under R reticulate package
+# https://www.r-bloggers.com/2022/04/getting-started-with-python-using-r-and-reticulate/
+# https://rstudio.github.io/reticulate/reference/install_miniconda.html
+```{r}
+library(reticulate)
+#x miniconda_path() is at "/home/tmm/.local/share/r-miniconda"
+#x $ wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+#install_miniconda(path = miniconda_path(), update = TRUE, force = TRUE)
+use_python("/usr/bin/python3")
+## pip instead of conda
+#$ sudo apt install python3-pip
+
+reticulate::py_install("pyvips")
+```
+
+
 # merge by pyvips =>
-#*** pip3 install pyvips
+#***sudo pip3 install pyvips
 #*** sudo apt install libvips
+# apt install python3.10-venv
 
 ```{python}
 #merge_tiles.py
@@ -12,12 +28,14 @@
 
 # a list in python: https://www.askpython.com/python/list/iterate-through-list-in-python
 # chatGPT prompt: please update my python code to do: 1) read TH*.tif filename in folder to produce list of structured_files with TH_id and regions variables. one example filename is "TH2123220-Region 008.tif", so TH_id should be extracted as "TH2123220", and regions should be "008". please update my code
+
 import pyvips
 import os
 import re
 
 files = os.listdir('/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/') #insert folder path
 structured_files = []
+file = []
 
 for file in files:
     if file.endswith('.tif') and file.startswith('TH'):
@@ -25,6 +43,7 @@ for file in files:
         TH_id = split_file[0]
         region = split_file[-1].split('.')[0]
         structured_files.append({'TH_id': TH_id, 'regions': region})
+        print(structured_files)
 
 print(structured_files)
     
