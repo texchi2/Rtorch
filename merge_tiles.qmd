@@ -42,15 +42,22 @@ for file in files:
         split_file = re.split("-| ", file)
         TH_id = split_file[0]
         region = split_file[-1].split('.')[0]
+        print(TH_id, region)
         structured_files.append({'TH_id': TH_id, 'regions': region})
-        print(structured_files)
+        # structured_files.append({'TH_id': TH_id, 'regions': region})
 
 print(structured_files)
-    
+```
+
+
+
+```{python}
         # tiles = [pyvips.Image.new_from_file(f"{x}_{y}.jpeg", access="sequential")
 #                 for y in range(height) for x in range(width)] 
 # string process https://stackoverflow.com/questions/71214436/how-to-extract-data-from-a-filename-in-python-convert-file-name-to-string
 
+TH_id = structured_files ??
+regions = structured_files ??
 #TH_id = "TH2123220"  #"TH2113193"
 #regions = ["008", "009", "010", "012"] #, "005", "006"]
 
