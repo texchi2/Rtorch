@@ -21,6 +21,9 @@ reticulate::py_install("pyvips")
 #*** sudo apt install libvips
 # apt install python3.10-venv
 
+# **2017 * https://stackoverflow.com/questions/49503195/reticulate-running-python-chunks-in-rmarkdown => quarto is better than Rmarkdown
+# python code chunk must run as a chunk (not line by line), to good handle of python indent structure
+
 ```{python}
 #merge_tiles.py
 # goal:
@@ -56,21 +59,30 @@ print(structured_files)
 #                 for y in range(height) for x in range(width)] 
 # string process https://stackoverflow.com/questions/71214436/how-to-extract-data-from-a-filename-in-python-convert-file-name-to-string
 
-TH_id = structured_files ??
-regions = structured_files ??
-#TH_id = "TH2123220"  #"TH2113193"
-#regions = ["008", "009", "010", "012"] #, "005", "006"]
+regions = []
 
-
-tiles = [pyvips.Image.new_from_file(f"{TH_id}-Region {y}.tif", access="sequential") for y in regions] 
-print([f"{TH_id}-Region {y}.tif" for y in regions])  
-
-# HE, CK13
-stains = "CK13"
-image = pyvips.Image.arrayjoin(tiles, across= len(regions), background=255) # white
-image.write_to_file(f"../{TH_id}_{stains}.tif", compression="deflate", tile=True)
-#"jpeg", tile=True)
-# lzw or deflate by Adobe
+for x in range(len(structured_files)-1): # 0:48
+  TH_id = structured_files[x]["TH_id"]
+  regions.append(structured_files[x]["regions"])
+  for y in range(x + 1, len(structured_files)-1): # compare x and rest of list
+    if structured_files[x]['TH_id'] == structured_files[y]['TH_id']:
+      #TH_id from structured_files ??
+      regions.append(structured_files[y]["regions"])
+      #TH_id = "TH2123220"  #"TH2113193"
+      #regions = ["008", "009", "010", "012"] #, "005", "006"]
+      # merge tiles
+      tiles = [pyvips.Image.new_from_file(f"{TH_id}-Region {yr}.tif", access="sequential") for yr in regions] 
+      print([f"{TH_id}-Region {yr}.tif" for yr in regions])  
+      # HE, CK13
+      stains = "CK13"
+      image = pyvips.Image.arrayjoin(tiles, across= len(regions), background=255) # white
+      image.write_to_file(f"../{TH_id}_{stains}.tif", compression="deflate", tile=True)
+      #"jpeg", tile=True)
+      # lzw or deflate by Adobe
+      
+  # next x
+  x = x + len(regions)
+  regions = []
 
 ```
 ```{r}
