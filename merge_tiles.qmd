@@ -71,12 +71,12 @@ for x in range(len(structured_files)-1): # 0:48
       #TH_id = "TH2123220"  #"TH2113193"
       #regions = ["008", "009", "010", "012"] #, "005", "006"]
       # merge tiles
-      tiles = [pyvips.Image.new_from_file(f"{TH_id}-Region {yr}.tif", access="sequential") for yr in regions] 
+      tiles = [pyvips.Image.new_from_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/{TH_id}-Region {yr}.tif", access="sequential") for yr in regions] 
       print([f"{TH_id}-Region {yr}.tif" for yr in regions])  
       # HE, CK13
       stains = "CK13"
       image = pyvips.Image.arrayjoin(tiles, across= len(regions), background=255) # white
-      image.write_to_file(f"../{TH_id}_{stains}.tif", compression="deflate", tile=True)
+      image.write_to_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/{TH_id}_{stains}.tif", compression="deflate", tile=True)
       #"jpeg", tile=True)
       # lzw or deflate by Adobe
       
