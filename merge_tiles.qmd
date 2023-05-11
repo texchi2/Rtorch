@@ -25,7 +25,7 @@ reticulate::py_install("pyvips")
 # python code chunk must run as a chunk (not line by line), to good handle of python indent structure
 
 ```{python}
-#merge_tiles.py
+### merge_tiles.py
 # goal:
 # TH2113193-Region 001.tif, TH2113193-Region 002.tif => TH2113193_HE.tif
 
@@ -36,7 +36,9 @@ import pyvips
 import os
 import re
 
-files = os.listdir('/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/') #insert folder path
+stains = "CK13"
+
+files = os.listdir("/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_{stains}_Box1246/") #insert folder path
 structured_files = []
 file = []
 
@@ -55,7 +57,7 @@ print(structured_files)
 
 
 ```{python}
-        # tiles = [pyvips.Image.new_from_file(f"{x}_{y}.jpeg", access="sequential")
+#### tiles = [pyvips.Image.new_from_file(f"{x}_{y}.jpeg", access="sequential")
 #                 for y in range(height) for x in range(width)] 
 # string process https://stackoverflow.com/questions/71214436/how-to-extract-data-from-a-filename-in-python-convert-file-name-to-string
 
@@ -73,16 +75,16 @@ while x < len(structured_files): # 0:47
       #regions = ["008", "009", "010", "012"] #, "005", "006"]
       
   # merge tiles
-  tiles = [pyvips.Image.new_from_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/{TH_id}-Region {yr}.tif", access="sequential") for yr in regions] 
+  tiles = [pyvips.Image.new_from_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_{stains}_Box1246/{TH_id}-Region {yr}.tif", access="sequential") for yr in regions] 
   print([f"{TH_id}-Region {yr}.tif" for yr in regions])  
   # HE, CK13
-  stains = "CK13"
+  #stains = "CK13"
   image = pyvips.Image.arrayjoin(tiles, across= len(regions), background=255) # white
   image.write_to_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/{TH_id}_{stains}.tif", compression="deflate", tile=True)
   #"jpeg", tile=True)
   # lzw or deflate by Adobe
   
-  #if len(regions)    
+  # https://stackoverflow.com/questions/17837316/how-do-i-skip-a-few-iterations-in-a-for-loop  
   # next x, jump by x = x[::2]
   x += len(regions)
   regions = []
