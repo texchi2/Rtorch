@@ -60,28 +60,31 @@ print(structured_files)
 # string process https://stackoverflow.com/questions/71214436/how-to-extract-data-from-a-filename-in-python-convert-file-name-to-string
 
 regions = []
-
-for x in range(len(structured_files)-1): # 0:48
+x = 0
+while x < len(structured_files): # 0:47
   TH_id = structured_files[x]["TH_id"]
   regions.append(structured_files[x]["regions"])
+  #y = x + 1
   for y in range(x + 1, len(structured_files)-1): # compare x and rest of list
     if structured_files[x]['TH_id'] == structured_files[y]['TH_id']:
       #TH_id from structured_files ??
       regions.append(structured_files[y]["regions"])
       #TH_id = "TH2123220"  #"TH2113193"
       #regions = ["008", "009", "010", "012"] #, "005", "006"]
-      # merge tiles
-      tiles = [pyvips.Image.new_from_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/{TH_id}-Region {yr}.tif", access="sequential") for yr in regions] 
-      print([f"{TH_id}-Region {yr}.tif" for yr in regions])  
-      # HE, CK13
-      stains = "CK13"
-      image = pyvips.Image.arrayjoin(tiles, across= len(regions), background=255) # white
-      image.write_to_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/{TH_id}_{stains}.tif", compression="deflate", tile=True)
-      #"jpeg", tile=True)
-      # lzw or deflate by Adobe
       
-  # next x
-  x = x + len(regions)
+  # merge tiles
+  tiles = [pyvips.Image.new_from_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_CK13_Box1246/{TH_id}-Region {yr}.tif", access="sequential") for yr in regions] 
+  print([f"{TH_id}-Region {yr}.tif" for yr in regions])  
+  # HE, CK13
+  stains = "CK13"
+  image = pyvips.Image.arrayjoin(tiles, across= len(regions), background=255) # white
+  image.write_to_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/{TH_id}_{stains}.tif", compression="deflate", tile=True)
+  #"jpeg", tile=True)
+  # lzw or deflate by Adobe
+  
+  #if len(regions)    
+  # next x, jump by x = x[::2]
+  x += len(regions)
   regions = []
 
 ```
