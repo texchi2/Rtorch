@@ -1,6 +1,10 @@
 # install R torch since 2023/04/23
 # as https://github.com/texchi2/Rtorch.git
 # $ git remote add origin git@github.com:texchi2/Rtorch.git (ok) 2023/04/24
+# ebook of R Torch https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/tensors.html#tensors-from-datasets
+# R Torch chapter 71  https://jtr13.github.io/cc21fall2/tutorial-on-r-torch-package.html
+# prime of Python for R users https://rstudio.github.io/reticulate/articles/python_primer.html
+# latex and R in macOS https://www.macinchem.org/blog/files/category-latex.php
 
 install.packages(c("pak", "pkgdepends", "pkgcache"))
 pak::pak("r-lib/devtools")
