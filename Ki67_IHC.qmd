@@ -1,0 +1,57 @@
+---
+title: "Ki67_IHC"
+format: html
+editor: visual
+jupyter: python3
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{python}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{python}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+==
+
+For convert ipynb to qmd
+
+https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html
+
+Read a Jupyter/IPython notebook file (`.ipynb`) via
+[`jsonlite::fromJSON()`](https://rdrr.io/pkg/jsonlite/man/fromJSON.html), convert its code cells to R Markdown code
+chunks, preserve Markdown cells, and write out the results to an Rmd file.
+
+```{r}
+convert_ipynb(input, output = xfun::with_ext(input, "Rmd"))
+
+```
+
+```{r}
+
+nb_file <- file.choose()
+xfun::file_string(nb_file)  # show file content
+
+# convert and write to R Markdown or Quarto qmd
+nb_rmd <- rmarkdown:::convert_ipynb(nb_file)
+xfun::file_string(nb_rmd)
+
+#rmd_file = tempfile(fileext = '.rmd')
+#jsonlite::write_json(nb_rmd, rmd_file, auto_unbox = TRUE, pretty = TRUE)
+
+
+```
