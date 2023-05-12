@@ -37,7 +37,7 @@ import pyvips
 import os
 import re
 
-stains = "p53" # "CK17" #"CK13"
+stains = "Ki67" #  "p53" # "CK17" #"CK13"
 files = []
 
 files = os.listdir(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_{stains}_Box1246/") #insert folder path
@@ -58,9 +58,12 @@ for file in files:
 #os.system('clear')
 print(structured_files)
 ```
-After import filenames in that folder,
-pyvips processes for tiles merging.
+After step 1) import filenames in that folder,
 (Remarks: please rename some of files according warning)
+
+*** then Run step 1) again
+
+Step 2) pyvips processes for tiles merging.
 
 
 ```{python}
@@ -82,7 +85,8 @@ while x < len(structured_files): # 0:47
       #TH_id = "TH2123220"  #"TH2113193"
       #regions = ["008", "009", "010", "012"] #, "005", "006"]
       
-  # merge tiles
+  # merge tiles by *** Comprehensions of Python
+  # https://rstudio.github.io/reticulate/articles/python_primer.html
   tiles = [pyvips.Image.new_from_file(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_{stains}_Box1246/{TH_id}-Region {yr}.tif", access="sequential") for yr in regions] 
   print([f"{TH_id}-Region {yr}.tif" for yr in regions])  
   # HE, CK13
