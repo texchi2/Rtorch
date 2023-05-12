@@ -36,9 +36,10 @@ import pyvips
 import os
 import re
 
-stains = "CK13"
+stains = "CK17" #"CK13"
+files = []
 
-files = os.listdir("/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_{stains}_Box1246/") #insert folder path
+files = os.listdir(f"/mnt/c/Users/User/Documents/TissueFAXS_OVH2022/TMUH2017/OVH_TMUH_2017_WSI_{stains}_Box1246/") #insert folder path
 structured_files = []
 file = []
 
