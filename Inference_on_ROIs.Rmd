@@ -47,12 +47,17 @@ class Net(nn.Module):
 ```
 
 ```{python}
+# *** source code warning: execute only once 
+tmp_model = torch.load('resnet18_0.9326.model') # or with map_location=torch.device('cpu')
+torch.save(tmp_model, 'new_resnet18_0.9326.model')
+#
 device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 # torch.load with map_location=torch.device('cpu') to map your storages to the CPU
 if device.type == "cpu": 
-  trained_model = torch.load('resnet18_0.9326.model', map_location=torch.device('cpu'))
+  trained_model = torch.load('new_resnet18_0.9326.model', map_location=torch.device('cpu'))
 else:
-  trained_model = torch.load('resnet18_0.9326.model') # cuda
+  trained_model = torch.load('new_resnet18_0.9326.model') # cuda
+
 trained_model.eval()
 trained_model = trained_model.to(device)
 
@@ -67,6 +72,7 @@ conv_fc = conv_fc.to(device)
 # 3. Test the transformed model
 
 ```{python}
+# dataset available at https://drive.google.com/drive/folders/1rotoQHoAH_m8tJfSiMbL_n3a6xeLviY0?usp=sharing
 image = cv2.imread('Test_ROIs/test_input_he/26.png')
 resized_w = image.shape[1]
 resized_h = image.shape[0]
