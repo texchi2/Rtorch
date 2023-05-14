@@ -8,11 +8,14 @@ output: html_document
 ```{python}
 from tqdm import tqdm
 
+# pip3 install opencv-python
 import cv2
 import glob
 import matplotlib.pyplot as plt
 import numpy as np
 
+# this is a pytorch: https://pytorch.org/get-started/locally/
+# if in wsl ubuntu: https://fizzylogic.nl/2022/11/02/how-to-set-up-cuda-and-pytorch-in-ubuntu-22-04-on-wsl2
 import torch
 import torch.nn as nn
 
