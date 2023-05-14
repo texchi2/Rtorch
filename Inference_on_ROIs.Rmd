@@ -48,7 +48,11 @@ class Net(nn.Module):
 
 ```{python}
 device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-trained_model = torch.load('resnet18_0.9326.model')
+# torch.load with map_location=torch.device('cpu') to map your storages to the CPU
+if device.type == "cpu": 
+  trained_model = torch.load('resnet18_0.9326.model', map_location=torch.device('cpu'))
+else:
+  trained_model = torch.load('resnet18_0.9326.model') # cuda
 trained_model.eval()
 trained_model = trained_model.to(device)
 
