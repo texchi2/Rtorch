@@ -45,7 +45,7 @@ class Net(nn.Module):
 
 ```{python}
 device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-trained_model = torch.load('resnet18_0.9326.model')
+trained_model = torch.load('resnet18_0.9326.model', map_location = "/home/tmm/Rtorch")
 trained_model.eval()
 trained_model = trained_model.to(device)
 
