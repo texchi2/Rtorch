@@ -48,8 +48,8 @@ class Net(nn.Module):
 
 ```{python}
 # *** source code warning: execute only once 
-tmp_model = torch.load('resnet18_0.9326.model') # or with map_location=torch.device('cpu')
-torch.save(tmp_model, 'new_resnet18_0.9326.model')
+#tmp_model = torch.load('resnet18_0.9326.model') # or with map_location=torch.device('cpu')
+#torch.save(tmp_model, 'new_resnet18_0.9326.model')
 #
 device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 # torch.load with map_location=torch.device('cpu') to map your storages to the CPU
