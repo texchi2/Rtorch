@@ -1,5 +1,5 @@
 ---
-title: An R Markdown document converted from "/home/tmm/predict_Ki-67_from_HE/Inference_on_ROIs.ipynb"
+title: An R Markdown document converted from "/home/tmm/predict_Ki-66_from_HE/Inference_on_ROIs.ipynb"
 output: html_document
 ---
 
