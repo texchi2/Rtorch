@@ -52,8 +52,8 @@ device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 # torch.load with map_location=torch.device('cpu') to map your storages to the CPU
 if device.type == "cpu": 
   trained_model = torch.load('new_resnet18_0.9326.model', map_location=torch.device('cpu'))
-else:
-  trained_model = torch.load('new_resnet18_0.9326.model', map_location=torch.device('cuda:1')) # cuda
+elif device.type == "cuda": # else if
+  trained_model = torch.load('new_resnet18_0.9326.model', map_location=torch.device('cuda')) # cuda
 
 trained_model.eval()
 trained_model = trained_model.to(device)
