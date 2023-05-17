@@ -147,6 +147,7 @@ color_out[:,:,2][out_mask] = 255
 
 cv2.imwrite('infer_out.png', color_out)
 plt.imshow(cv2.cvtColor(color_out,cv2.COLOR_BGR2RGB))
+plt.show()
 ```
 
 # 4. Calculate the statistical indexes of H&E stained ROIs
