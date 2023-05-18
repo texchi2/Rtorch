@@ -81,6 +81,8 @@ plt.show()
 ```
 
 ```{python}
+# *** in this step: switch to cpu device to avoid out of memory and R session crash
+device = torch.device(type="cpu")
 sub_num = 1
 
 transformation = transforms.Compose([
@@ -234,6 +236,9 @@ def HE_calc(img_path):
 ```
 
 ```{python}
+## switch back to cuda GPU
+device = torch.device(type="cuda")
+
 HE_list = glob.glob('Test_ROIs/test_input_he/*.png')
 
 HE_list.sort()
