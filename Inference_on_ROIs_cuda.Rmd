@@ -83,6 +83,11 @@ plt.imshow(image)
 #plt.show()
 ```
 
+```{r}
+debugonce() 
+```
+
+
 ```{python}
 # x *** in this step: temporary switch to cpu device to avoid out of memory and R session crash
 #device = torch.device(type="cpu")
@@ -96,7 +101,14 @@ transformation = transforms.Compose([
 X_temp = None
 Y_temp = None
 
+
+```
+
+
+```{python}
 # try debug with error message
+import ipdb
+ipdb.set_trace()
 try:
   
   with tqdm(total=sub_num*sub_num) as pbar:
