@@ -51,6 +51,8 @@ class Net(nn.Module):
 # >>> 0
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # torch.load with map_location=torch.device('cpu') to map your storages to the CPU
+# x temporary set =>
+# device = torch.device("cpu")
 if device.type == "cpu": 
   trained_model = torch.load('new_resnet18_0.9326.model', map_location=torch.device('cpu'))
 elif device.type == "cuda": # else if
@@ -61,7 +63,8 @@ trained_model = trained_model.to(device)
 
 convLayers = nn.Sequential(*list(trained_model.children())[:-1])
 
-conv_fc = nn.Conv2d(in_channels=512, out_channels=3, kernel_size=2, stride=1)
+# adjust kenel_size=2, stride=1 into ...
+conv_fc = nn.Conv2d(in_channels=512, out_channels=3, kernel_size=2, stride=5)
 conv_fc.load_state_dict({"weight":trained_model.fc.state_dict()['weight'].view(3, 512, 2, 2),
                        "bias":trained_model.fc.state_dict()['bias']})
 conv_fc = conv_fc.to(device)
@@ -77,12 +80,12 @@ image = cv2.imread('/home/tmm/Rtorch/Test_ROIs/test_input_he/26.png') #TH1919729
 resized_w = image.shape[1]
 resized_h = image.shape[0]
 plt.imshow(image)
-plt.show()
+#plt.show()
 ```
 
 ```{python}
-# *** in this step: switch to cpu device to avoid out of memory and R session crash
-device = torch.device(type="cpu")
+# x *** in this step: temporary switch to cpu device to avoid out of memory and R session crash
+#device = torch.device(type="cpu")
 sub_num = 1
 
 transformation = transforms.Compose([
@@ -93,7 +96,10 @@ transformation = transforms.Compose([
 X_temp = None
 Y_temp = None
 
-with tqdm(total=sub_num*sub_num) as pbar:
+# try debug with error message
+try:
+  
+  with tqdm(total=sub_num*sub_num) as pbar:
     for y in range(sub_num):
         for x in range(sub_num):
             xs = int(resized_w*x/sub_num)
@@ -104,6 +110,7 @@ with tqdm(total=sub_num*sub_num) as pbar:
             _image_tensor = transformation(sub_image).float()
             image_tensor = _image_tensor.unsqueeze_(0)
 
+            # x temporary hold cuda
             if torch.cuda.is_available():
                 image_tensor = image_tensor.to(device)
 
@@ -124,6 +131,9 @@ with tqdm(total=sub_num*sub_num) as pbar:
         else:
             Y_temp = X_temp
         X_temp = None
+
+except Exception as e:
+    print(e)
 ```
 
 ```{python}
@@ -149,6 +159,7 @@ color_out[:,:,2][out_mask] = 255
 
 cv2.imwrite('infer_out.png', color_out)
 plt.imshow(cv2.cvtColor(color_out,cv2.COLOR_BGR2RGB))
+plt.show()
 ```
 
 # 4. Calculate the statistical indexes of H&E stained ROIs
@@ -236,8 +247,8 @@ def HE_calc(img_path):
 ```
 
 ```{python}
-## switch back to cuda GPU
-device = torch.device(type="cuda")
+## x switch back to cuda GPU
+#device = torch.device(type="cuda")
 
 HE_list = glob.glob('Test_ROIs/test_input_he/*.png')
 
@@ -294,6 +305,8 @@ def IHC_calc(img_path):
 ```
 
 ```{python}
+# swith to cuda
+device=torch.device("cuda")
 IHC_list = glob.glob('Test_ROIs/test_input_ki67/*.png')
 IHC_list.sort()
 IHC_Dpos = []
