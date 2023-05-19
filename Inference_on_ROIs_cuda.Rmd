@@ -2,6 +2,18 @@
 title: An R Markdown document converted from "/home/tmm/predict_Ki-66_from_HE/Inference_on_ROIs.ipynb"
 output: html_document
 ---
+# 0. R-reticulate and Miniconda environment
+```{r}
+# bash Miniconda......sh
+# installed at /home/tmm/.local/share/r-miniconda/ => keypoint is "r-miniconda" for reticulate to use
+library(reticulate)
+use_miniconda("/home/tmm/.local/share/r-miniconda/")
+
+# install torch with cuda support under r-miniconda
+reticulate::py_install(c("torch","torchvision","torchaudio", "pytorch-cuda=11.7"), method="conda")
+
+```
+
 
 # 1. Import some necessary modules
 
@@ -84,7 +96,7 @@ plt.imshow(image)
 ```
 
 ```{r}
-debugonce() 
+#debugonce() 
 ```
 
 
@@ -105,15 +117,79 @@ Y_temp = None
 ```
 
 
+
+# 3.5 we should debug from here (R torch)
+# debug by R way
+```{r}
+# try debug with error message
+# import ipdb; ipdb.set_trace()
+# import logging
+# logging.basicConfig(level=logging.DEBUG)
+
+pbar <- tqdm(total=sub_num*sub_num)
+for (y in seq_len(sub_num)) {
+  for (x in seq_len(sub_num)) {
+    # import ipdb; ipdb.set_trace()
+    # logging.debug(f"Entering tqdm with argument x as {x}")
+    print(sprintf("x as %d, and y as %d in these for loops", x, y))
+    # try({
+      xs <- as.integer(resized_w*x/sub_num)
+      ys <- as.integer(resized_h*y/sub_num)
+      ws <- as.integer(resized_w/sub_num)
+      hs <- as.integer(resized_h/sub_num)
+      sub_image <- image[ys:(ys+hs), xs:(xs+ws), ]
+      under_image_tensor <- transformation(sub_image)$float()
+      image_tensor <- under_image_tensor$unsqueeze(0)
+
+      # x temporary hold cuda
+      if (torch::cuda_is_available()) {
+        image_tensor <- image_tensor$to(device)
+      }
+
+      inputs <- torch::Variable(image_tensor)
+      torch::no_grad({
+        output1 <- convLayers(inputs)
+        underscore_output2 <- conv_fc(output1)
+        output2 <- nnf::softmax(underscore_output2, dim=1)
+      })
+
+      if (!is.null(X_temp)) {
+        X_temp <- torch::cat(list(X_temp,output2),3)
+      } else {
+        X_temp <- output2
+      }
+      pbar$update(1)
+    # }, error = function(e) {
+    #   print(sprintf("An error occurred: %s", e))
+    #   import ipdb; ipdb.post_mortem()
+    # })
+  }
+
+  if (!is.null(Y_temp)) {
+    Y_temp <- torch::cat(list(Y_temp,X_temp),2)
+  } else {
+    Y_temp <- X_temp
+    X_temp <- NULL
+  }
+}
+```
+
+
+
+# 3.6 we should debug from here (Pytorch)
 ```{python}
 # try debug with error message
-import ipdb
-ipdb.set_trace()
-try:
-  
-  with tqdm(total=sub_num*sub_num) as pbar:
+# import ipdb; ipdb.set_trace()
+#import logging
+#logging.basicConfig(level=logging.DEBUG)
+
+with tqdm(total=sub_num*sub_num) as pbar:
     for y in range(sub_num):
         for x in range(sub_num):
+          #import ipdb; ipdb.set_trace()
+          #logging.debug(f"Entering tqdm with argument x as {x}")
+          print(f"x as {x}, and y as {y} in these for loops")
+          #try:
             xs = int(resized_w*x/sub_num)
             ys = int(resized_h*y/sub_num)
             ws = int(resized_w/sub_num)
@@ -137,15 +213,19 @@ try:
             else:
                 X_temp = output2
             pbar.update(1)
+            pass
+          
+          #except Exception as e:
+            #print(f"An error occurred: {e}")
+            # import ipdb; ipdb.post_mortem()
 
         if Y_temp is not None:
             Y_temp = torch.cat([Y_temp,X_temp],2)
         else:
             Y_temp = X_temp
-        X_temp = None
+            X_temp = None
 
-except Exception as e:
-    print(e)
+
 ```
 
 ```{python}
