@@ -16,7 +16,7 @@ reticulate::conda_list("/home/tmm/.local/share/r-miniconda/bin/conda")
 
 use_condaenv(condaenv = "r-reticulate", conda = "/home/tmm/.local/share/r-miniconda/bin/conda")
 
-# as use_python("/home/tmm/.local/share/r-miniconda/envs/r-reticulate/bin/python")
+use_python("/home/tmm/.local/share/r-miniconda/envs/r-reticulate/bin/python")
 ```
 
 

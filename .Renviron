@@ -1,0 +1,2 @@
+# .Renviron
+use_python("/home/tmm/.local/share/r-miniconda/envs/r-reticulate/bin/python")
