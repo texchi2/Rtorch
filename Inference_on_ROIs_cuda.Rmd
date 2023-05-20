@@ -10,8 +10,13 @@ library(reticulate)
 use_miniconda("/home/tmm/.local/share/r-miniconda/")
 
 # install torch with cuda support under r-miniconda
-reticulate::py_install(c("torch","torchvision","torchaudio", "pytorch-cuda=11.7"), method="conda")
+reticulate::conda_install(packages=c("pytorch","torchvision","torchaudio", "pytorch-cuda=11.7", "python=3.10"), method="conda", channel = c("pytorch", "nvidia"))
 
+reticulate::conda_list("/home/tmm/.local/share/r-miniconda/bin/conda")
+
+use_condaenv(condaenv = "r-reticulate", conda = "/home/tmm/.local/share/r-miniconda/bin/conda")
+
+# as use_python("/home/tmm/.local/share/r-miniconda/envs/r-reticulate/bin/python")
 ```
 
 
