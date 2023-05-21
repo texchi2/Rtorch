@@ -20,7 +20,11 @@ You can add options to executable code like this
 ```{r}
 #| echo: false
 
-reticulate::conda_install(packages = "openslide-python")
+
+reticulate::use_condaenv(condaenv = "r-reticulate", conda = "/home/tmm/.local/share/r-reticulate/miniconda3/bin/conda")
+
+reticulate::use_python("/home/tmm/.local/share/r-reticulate/miniconda3/bin/python")
+reticulate::conda_install(packages = c("matplotlib", "openslide-python", "pytorch", "torchvision", "torchaudio ", "pytorch-cuda=11.7"), channel = c("pytorch", "nvidia"))
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
@@ -44,7 +48,8 @@ slide = open_slide("/mnt/c/Users/User/Downloads/WSI_DrOmar/test1.mrxs")
 # location: (x, y) tuple giving the top left pixel in the level 0 reference frame
 # level: the level number
 # size: (width, height) tuple giving the region size
-region = slide.read_region((0, 0), 0, (slide.dimensions))
+new_dimensions = tuple(int(x / 30) for x in slide.dimensions)
+region = slide.read_region((0, 0), 0, (new_dimensions))
 
 # Convert the region to a PIL Image
 region = region.convert('RGB')
