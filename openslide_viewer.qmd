@@ -1,0 +1,65 @@
+---
+title: "openslide_viewer"
+format: html
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+
+reticulate::conda_install(packages = "openslide-python")
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+
+## OpenSlide
+Here is an example of how you can use OpenSlide and PyTorch to view an `.mrxs` image:
+
+```{python}
+import openslide
+from openslide import open_slide
+from PIL import Image
+import torch
+from torchvision.transforms import ToTensor
+
+# Open the slide
+slide = open_slide("/mnt/c/Users/User/Downloads/WSI_DrOmar/test1.mrxs")
+
+# Read a region from the slide
+# Usage: read_region(location, level, size)
+# location: (x, y) tuple giving the top left pixel in the level 0 reference frame
+# level: the level number
+# size: (width, height) tuple giving the region size
+region = slide.read_region((0, 0), 0, (slide.dimensions))
+
+# Convert the region to a PIL Image
+region = region.convert('RGB')
+
+# Convert the PIL Image to a PyTorch tensor
+tensor = ToTensor()(region)
+
+# Display the image using PyTorch
+import matplotlib.pyplot as plt
+plt.imshow(tensor.permute(1, 2, 0))
+plt.show()
+```
+
+This code opens an `.mrxs` slide using OpenSlide's `open_slide` function. It then reads a region from the slide using the `read_region` method and converts it to a PIL Image. The image is then converted to a PyTorch tensor using the `ToTensor` transform from `torchvision.transforms`. Finally, the image is displayed using `matplotlib`.
+
+
+```
+
