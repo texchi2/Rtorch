@@ -9,8 +9,8 @@ total_budget <- 305673
 
 # Create a data frame with the TMM purchase progression data
 tmm_data <- data.frame(
-  Equipment = c("Autoclave", "C-arm", "ABG", "Telemedicine", "PACS_radi", "PACS_path", "Vitek",  "DrillMotor"), 
-  Price = as.numeric(c(4400, 48000, 33760, 52000, 75000, 50000, 40000, 1950))
+  Equipment = c("Autoclave", "C-arm", "ABG", "Telemedicine", "PACS", "FTTO", "Vitek",  "DrillMotor"), 
+  Price = as.numeric(c(4400, 48000, 33760, 52000, 95000, 30000, 40000, 1950))
 )
 # 125,000 => 75,000; 50,000 for example
 
@@ -54,7 +54,7 @@ p1 <- ggplot(tmm_data , aes(x = "", y = Percentage, fill = Color)) +
   geom_bar(width = 1, stat = "identity") +
   coord_polar("y", start = 0) +
   theme_void() +
-  scale_fill_manual(values = c("Telemedicine" = "red", "PACS_radi" = "turquoise2", "C-arm" = "brown", "ABG" = "wheat", "Others" = "white", "PACS_path" = "lawngreen", "Autoclave"="slateblue2", "Vitek" = "yellow3", "DrillMotor" = "yellow")) +
+  scale_fill_manual(values = c("Telemedicine" = "red", "PACS" = "turquoise2", "C-arm" = "brown", "ABG" = "wheat", "Others" = "white", "FTTO" = "lawngreen", "Autoclave"="slateblue2", "Vitek" = "yellow3", "DrillMotor" = "yellow")) +
   geom_text(aes(label = paste0(round(Percentage, 1), "%")), position = position_stack(vjust = 0.3), size =2) +
   labs(fill = "Equipments")
 
