@@ -9,8 +9,8 @@ total_budget <- 305673
 
 # Create a data frame with the TMM purchase progression data
 tmm_data <- data.frame(
-  Equipment = c("Autoclave", "C-arm", "ABG", "Telemedicine", "PACS", "FTTO", "Vitek",  "DrillMotor"), 
-  Price = as.numeric(c(4400, 48000, 33760, 52000, 95000, 30000, 40000, 1950))
+  Equipment = c("Autoclave", "C-arm", "ABG", "Telemedicine", "VelScope", "FTTO", "Vitek",  "DrillMotor"), 
+  Price = as.numeric(c(4400, 48000, 33760, 52000, 5500, 30000, 40000, 1950))
 )
 # 125,000 => 75,000; 50,000 for example
 
@@ -24,8 +24,8 @@ tmm_data <- tmm_data %>% arrange(Price)
 
 # Draw a stacked bar chart
 ggplot(tmm_data, aes(x = Equipment, y = Price)) +
-  geom_bar(stat = "identity", width = 1.0) +
-  ggtitle("TMM Purchase Plan before 2023/06") +
+  geom_bar(stat = "identity", width = 0.8) +
+  ggtitle("TMM Purchases from January 2023 to June 2023") +
   xlab("Equipment") +
   ylab("Price (USD)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
@@ -35,28 +35,29 @@ ggplot(tmm_data, aes(x = Equipment, y = Price)) +
 # Calculate the percentage of the total budget spent on Telemedicine, PACS, and C-arm
 tmm_data$Percentage <- tmm_data$Price / total_budget * 100
 
-# Create a new column to specify the color of each equipment category
-tmm_data$Color <- ifelse(tmm_data$Equipment %in% c("Autoclave", "C-arm", "ABG", "Telemedicine", "PACS_radi", "PACS_path", "Vitek",  "DrillMotor"), tmm_data$Equipment, "Others") # Others= xxx
+# Create a new column to specify the color of each equipment category: others
+tmm_data$Color <- ifelse(tmm_data$Equipment %in% c("Autoclave", "C-arm", "ABG", "VelScope", "FTTO", "Vitek",  "DrillMotor"), tmm_data$Equipment, "Others") # Others= xxx, 
 
 # Order the data by price in descending order
 tmm_data <- tmm_data %>% arrange(desc(Price))
 
 
 
-# VelScope on 2024
+#  "Telemedicine", "PACS", on 2024
 # %>% filter(Color != "Others")
+######################################
 
 
-
-
+####################
 # Create a pie chart for the major equipment categories
 p1 <- ggplot(tmm_data , aes(x = "", y = Percentage, fill = Color)) +
   geom_bar(width = 1, stat = "identity") +
   coord_polar("y", start = 0) +
   theme_void() +
-  scale_fill_manual(values = c("Telemedicine" = "red", "PACS" = "turquoise2", "C-arm" = "brown", "ABG" = "wheat", "Others" = "white", "FTTO" = "lawngreen", "Autoclave"="slateblue2", "Vitek" = "yellow3", "DrillMotor" = "yellow")) +
+  scale_fill_manual(values = c("Telemedicine" = "red", "C-arm" = "brown", "ABG" = "wheat", "Others" = "slategray3", "FTTO" = "lawngreen", "Autoclave"="slateblue2", "Vitek" = "yellow3", "DrillMotor" = "yellow", "VelScope"="turquoise2")) +
   geom_text(aes(label = paste0(round(Percentage, 1), "%")), position = position_stack(vjust = 0.3), size =2) +
   labs(fill = "Equipments")
+# spared: "PACS" = "turquoise2", 
 
 #  scale_fill_manual(name = "Equipment", values = c("Telemedicine" = "red", "PACS" = "turquoise2", "C-arm" = "brown", "ABG" = "wheat", "Others" = "white", "Veloscope" = "lawngreen", "Autoclave"="slateblue2")) +
 #  geom_text(aes(label = paste0("$", Price)), position = position_stack(vjust = 0.3), size = 5)
@@ -70,10 +71,10 @@ p2 <- ggplot(tmm_data , aes(x = "", y = Percentage, fill = Color)) +
   geom_bar(width = 1, stat = "identity") +
   coord_polar("y", start = 0) +
   theme_void() +
-  scale_fill_manual(values = c("Telemedicine" = "white", "PACS_radi" = "white", "C-arm" = "white", "ABG" = "white", "Others" = "slategray3", "PACS_path" = "white", "Autoclave"="white", "Vitek" = "white", "DrillMotor" = "white")) +
+  scale_fill_manual(values = c("Telemedicine" = "white", "PACS" = "white", "C-arm" = "white", "ABG" = "white", "Others" = "slategray3", "FTTO" = "white", "Autoclave"="white", "Vitek" = "white", "DrillMotor" = "white", "VelScope"="white")) +
   labs(fill = "Equipments")
 
-#+ geom_text(aes(label = paste0("$", Price)), position = position_stack(vjust = 0.3), size =3)
+#+   geom_text(aes(label = paste0("$", Price)), position = position_stack(vjust = 0.3), size =3)
 
 # slategray3; %>% filter(Color != "Others")
 
@@ -96,8 +97,8 @@ title1 <- grobTree(
 )
 
 # Create textGrobs for the labels with adjusted vertical position
-label_p1 <- textGrob(paste0("Purchasing: ", round(sum(tmm_data$Percentage[1:8]), 2), "%"), y = unit(1.3, "npc"))
-label_p2 <- textGrob(paste0("Planning: ", round(tmm_data$Percentage[tmm_data$Equipment=="Others"], 2), "%"), y = unit(1.2, "npc"))
+label_p1 <- textGrob(paste0("Purchasing: ", round(sum(tmm_data$Percentage[tmm_data$Color!="Others"]), 2), "%"), y = unit(1.3, "npc"))
+label_p2 <- textGrob(paste0("Planning: ", round(sum(tmm_data$Percentage[tmm_data$Color=="Others"]), 2), "%"), y = unit(1.2, "npc"))
 
 
 # Arrange the plots side by side with a common title and footer

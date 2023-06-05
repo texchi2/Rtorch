@@ -8,7 +8,7 @@ We're writing to provide you with an update on TMM's capacity-building and medic
 
 ## Description
 
-TMM is currently working on a plan to purchase medical equipment in 2023. We are sticking to our spending plan so that we can make the best use of the resources that we have. As you can see from the table and charts below, our progress has been fairly satisfactory. As of June 2023, we will have bought or will buy far more than 80% of what we had planned to buy.
+TMM is currently working on a plan to purchase medical equipment in 2023. We are sticking to our spending plan so that we can make the best use of the resources that we have. As you can see from the table and charts below, our progress has been fairly satisfactory. As of June 2023, we will have bought or will buy more than 40% of what we had planned to buy.
 
 The medical equipment we want to buy includes autoclaves, C-arms, ABG machines, telemedicine systems, PACS for imaging and pathology, Vitek 2 Compact machines, and a multi-functional drill handpiece for bone surgery. We selected these items carefully to make sure they meet the needs of our patients and give our medical staff the tools they need to provide excellent care.
 
@@ -24,23 +24,18 @@ library(gridExtra)
 library(grid)
 library(knitr)
 
+
 ### # Calculate the total budget (USD)
 total_budget <- 305673
 
 # Create a data frame with the TMM purchase progression data
 tmm_data <- data.frame(
-  Equipment = c("Autoclave", "C-arm", "ABG", "Telemedicine", "PACS_radi", "PACS_path", "Vitek",  "DrillMotor"), 
-  Price = as.numeric(c(4400, 48000, 33760, 52000, 75000, 50000, 40000, 1950))
+  Equipment = c("Autoclave", "C-arm", "ABG", "Telemedicine", "VelScope", "Bact_Alert", "Vitek",  "DrillMotor", "FTTO"), 
+  Price = as.numeric(c(4400, 48000, 33760, 52000, 5500, 15000, 25000, 1950, 30000))
 )
+# 125,000 => 75,000; 50,000 for example
 
-```
-
-
-
-
-```{r}
-#| echo: false
-##
+# "VelScope", USD5,500
 # adding "Others" as the rest of total budget (under planning)
 tmm_others <- data.frame(Equipment = "Others", Price = as.numeric(total_budget-sum(tmm_data$Price)))
 tmm_data <- rbind(tmm_data, tmm_others)
@@ -50,24 +45,27 @@ tmm_data <- tmm_data %>% arrange(Price)
 
 # Draw a stacked bar chart
 ggplot(tmm_data, aes(x = Equipment, y = Price)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", width = 0.8) +
   ggtitle("TMM Purchases from January 2023 to June 2023") +
   xlab("Equipment") +
   ylab("Price (USD)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-
+# In this example, the angle argument of the element_text() function is set to 45, which means that the x-axis labels will be rotated by 45 degrees. The hjust argument is set to 1, which means that the labels will be horizontally justified to the right.
 
 
 # Calculate the percentage of the total budget spent on Telemedicine, PACS, and C-arm
 tmm_data$Percentage <- tmm_data$Price / total_budget * 100
 
-# Create a new column to specify the color of each equipment category
-tmm_data$Color <- ifelse(tmm_data$Equipment %in% c("Autoclave", "C-arm", "ABG", "Telemedicine", "PACS_radi", "PACS_path", "Vitek",  "DrillMotor"), tmm_data$Equipment, "Others") # Others= xxx
+# Create a new column to specify the color of each equipment category: others
+tmm_data$Color <- ifelse(tmm_data$Equipment %in% c("Autoclave", "C-arm", "ABG", "VelScope", "Bact_Alert", "Vitek",  "DrillMotor"), tmm_data$Equipment, "Others") # Others= xxx, 
 
 # Order the data by price in descending order
 tmm_data <- tmm_data %>% arrange(desc(Price))
 
+
+
+#  "Telemedicine", "PACS", on 2024
+# %>% filter(Color != "Others")
 
 ```
 
@@ -87,15 +85,15 @@ kable(tmm_data[,c(1:3)])
 #| echo: false
 ###
 
-
 # Create a pie chart for the major equipment categories
 p1 <- ggplot(tmm_data , aes(x = "", y = Percentage, fill = Color)) +
   geom_bar(width = 1, stat = "identity") +
   coord_polar("y", start = 0) +
   theme_void() +
-  scale_fill_manual(values = c("Telemedicine" = "red", "PACS_radi" = "turquoise2", "C-arm" = "brown", "ABG" = "wheat", "Others" = "white", "PACS_path" = "lawngreen", "Autoclave"="slateblue2", "Vitek" = "yellow3", "DrillMotor" = "yellow")) +
+  scale_fill_manual(values = c("Telemedicine" = "slategray3", "PACS" = "slategray3", "C-arm" = "brown", "ABG" = "wheat", "Others" = "slategray3", "FTTO" = "slategray3", "Autoclave"="slateblue2", "Vitek" = "yellow3", "DrillMotor" = "yellow", "VelScope"="turquoise2", "Bact_Alert"="yellow3")) +
   geom_text(aes(label = paste0(round(Percentage, 1), "%")), position = position_stack(vjust = 0.3), size =2) +
   labs(fill = "Equipments")
+# spared: "PACS" = "turquoise2", 
 
 #  scale_fill_manual(name = "Equipment", values = c("Telemedicine" = "red", "PACS" = "turquoise2", "C-arm" = "brown", "ABG" = "wheat", "Others" = "white", "Veloscope" = "lawngreen", "Autoclave"="slateblue2")) +
 #  geom_text(aes(label = paste0("$", Price)), position = position_stack(vjust = 0.3), size = 5)
@@ -109,10 +107,10 @@ p2 <- ggplot(tmm_data , aes(x = "", y = Percentage, fill = Color)) +
   geom_bar(width = 1, stat = "identity") +
   coord_polar("y", start = 0) +
   theme_void() +
-  scale_fill_manual(values = c("Telemedicine" = "white", "PACS_radi" = "white", "C-arm" = "white", "ABG" = "white", "Others" = "slategray3", "PACS_path" = "white", "Autoclave"="white", "Vitek" = "white", "DrillMotor" = "white")) +
+  scale_fill_manual(values = c("Telemedicine" = "slategray3", "PACS" = "slategray3", "C-arm" = "white", "ABG" = "white", "Others" = "slategray3", "FTTO" = "slategray3", "Autoclave"="white", "Vitek" = "white", "Bact_Alert"="white", "DrillMotor" = "white", "VelScope"="white")) +
   labs(fill = "Equipments")
 
-#+ geom_text(aes(label = paste0("$", Price)), position = position_stack(vjust = 0.3), size =3)
+#+   geom_text(aes(label = paste0("$", Price)), position = position_stack(vjust = 0.3), size =3)
 
 # slategray3; %>% filter(Color != "Others")
 
@@ -135,8 +133,8 @@ title1 <- grobTree(
 )
 
 # Create textGrobs for the labels with adjusted vertical position
-label_p1 <- textGrob(paste0("Purchasing: ", round(sum(tmm_data$Percentage[1:8]), 2), "%"), y = unit(1.3, "npc"))
-label_p2 <- textGrob(paste0("Planning: ", round(tmm_data$Percentage[tmm_data$Equipment=="Others"], 2), "%"), y = unit(1.2, "npc"))
+label_p1 <- textGrob(paste0("Purchasing: ", round(sum(tmm_data$Percentage[tmm_data$Color!="Others"]), 2), "%"), y = unit(1.3, "npc"))
+label_p2 <- textGrob(paste0("Planning: ", round(sum(tmm_data$Percentage[tmm_data$Color=="Others"]), 2), "%"), y = unit(1.2, "npc"))
 
 
 # Arrange the plots side by side with a common title and footer
@@ -157,6 +155,6 @@ grid.arrange(
 
 ## Conclusion
 
-TMM is doing well with its plan to purchase medical equipment by the middle of 2023. We're making good work and are on track to purchase more than `r paste0(100-round(tmm_data$Percentage[9], 2), "%")` of our annual budget in 2023, which is what our plan calls for. We are still committed to making smart investments in medical equipment so that we can give people the best care possible.
+TMM is doing well with its plan to purchase medical equipment by the middle of 2023. We're making good work and are on track to purchase more than `r paste0(100-round(sum(tmm_data$Percentage[tmm_data$Color=="Others"]), 2), "%")` of our annual budget in 2023, which is what our plan calls for. Telemedicine (`r paste0(round(tmm_data$Percentage[tmm_data$Equipment=="Telemedicine"], 2), "%")`), FTTO (`r paste0(round(tmm_data$Percentage[tmm_data$Equipment=="FTTO"], 2), "%")`), and PACS are examples of "Others" that are being planned. We are still committed to making smart investments in medical equipment so that we can give people the best care possible.
 
 
