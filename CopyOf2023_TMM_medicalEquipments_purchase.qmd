@@ -1,0 +1,162 @@
+---
+title: "2023 TMM Purchase Plan"
+author: "Taiwan Medical Mission (TMM) in the Republic of Somaliland"
+format: pdf
+---
+## Subject
+We're writing to provide you with an update on TMM's capacity-building and medical affairs tasks since 2023. We will highlight our attempts to make informed and reasonable decisions regarding this topic as well as our progress in adhering to our annual budget for investing in medical equipment.
+
+## Description
+
+TMM is currently working on a plan to purchase medical equipment in 2023. We are sticking to our spending plan so that we can make the best use of the resources that we have. As you can see from the table and charts below, our progress has been fairly satisfactory. As of June 2023, we will have bought or will buy far more than 80% of what we had planned to buy.
+
+The medical equipment we want to buy includes autoclaves, C-arms, ABG machines, telemedicine systems, PACS for imaging and pathology, Vitek 2 Compact machines, and a multi-functional drill handpiece for bone surgery. We selected these items carefully to make sure they meet the needs of our patients and give our medical staff the tools they need to provide excellent care.
+
+We are committed to making responsible investments in medical equipment. Our goal is to make sure that we have the best and most up-to-date tools to find and help our patients. We are sure that we will reach this goal if we stick to our budget plan and keep careful track of our progress.
+
+```{r}
+#| echo: false
+#| message: false
+# This message will not be displayed in the output
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(grid)
+library(knitr)
+
+### # Calculate the total budget (USD)
+total_budget <- 305673
+
+# Create a data frame with the TMM purchase progression data
+tmm_data <- data.frame(
+  Equipment = c("Autoclave", "C-arm", "ABG", "Telemedicine", "PACS", "FTTO", "Vitek",  "DrillMotor"), 
+  Price = as.numeric(c(4400, 48000, 33760, 52000, 95000, 30000, 40000, 1950))
+)
+
+```
+
+
+
+
+```{r}
+#| echo: false
+##
+# adding "Others" as the rest of total budget (under planning)
+tmm_others <- data.frame(Equipment = "Others", Price = as.numeric(total_budget-sum(tmm_data$Price)))
+tmm_data <- rbind(tmm_data, tmm_others)
+
+# Sort the data by price
+tmm_data <- tmm_data %>% arrange(Price)
+
+# Draw a stacked bar chart
+ggplot(tmm_data, aes(x = Equipment, y = Price)) +
+  geom_bar(stat = "identity") +
+  ggtitle("TMM Purchases from January 2023 to June 2023") +
+  xlab("Equipment") +
+  ylab("Price (USD)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+
+# Calculate the percentage of the total budget spent on Telemedicine, PACS, and C-arm
+tmm_data$Percentage <- tmm_data$Price / total_budget * 100
+
+# Create a new column to specify the color of each equipment category
+tmm_data$Color <- ifelse(tmm_data$Equipment %in% c("Autoclave", "C-arm", "ABG", "Telemedicine", "PACS", "FTTO", "Vitek",  "DrillMotor"), tmm_data$Equipment, "Others") # Others= xxx
+
+# Order the data by price in descending order
+tmm_data <- tmm_data %>% arrange(desc(Price))
+
+
+```
+
+
+TMM Purchases from January 2023 to June 2023 (Price: USD)
+```{r}
+#| echo: false
+
+# Create a table
+kable(tmm_data[,c(1:3)])
+
+
+
+```
+
+```{r}
+#| echo: false
+###
+
+
+# Create a pie chart for the major equipment categories
+p1 <- ggplot(tmm_data , aes(x = "", y = Percentage, fill = Color)) +
+  geom_bar(width = 1, stat = "identity") +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  scale_fill_manual(values = c("Telemedicine" = "red", "PACS" = "turquoise2", "C-arm" = "brown", "ABG" = "wheat", "Others" = "white", "FTTO" = "lawngreen", "Autoclave"="slateblue2", "Vitek" = "yellow3", "DrillMotor" = "yellow")) +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%")), position = position_stack(vjust = 0.3), size =2) +
+  labs(fill = "Equipments")
+
+#  scale_fill_manual(name = "Equipment", values = c("Telemedicine" = "red", "PACS" = "turquoise2", "C-arm" = "brown", "ABG" = "wheat", "Others" = "white", "Veloscope" = "lawngreen", "Autoclave"="slateblue2")) +
+#  geom_text(aes(label = paste0("$", Price)), position = position_stack(vjust = 0.3), size = 5)
+
+
+
+
+##
+# Create a pie chart for the other equipment categories
+p2 <- ggplot(tmm_data , aes(x = "", y = Percentage, fill = Color)) +
+  geom_bar(width = 1, stat = "identity") +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  scale_fill_manual(values = c("Telemedicine" = "white", "PACS" = "white", "C-arm" = "white", "ABG" = "white", "Others" = "slategray3", "FTTO" = "white", "Autoclave"="white", "Vitek" = "white", "DrillMotor" = "white")) +
+  labs(fill = "Equipments")
+
+#+ geom_text(aes(label = paste0("$", Price)), position = position_stack(vjust = 0.3), size =3)
+
+# slategray3; %>% filter(Color != "Others")
+
+
+
+##
+
+
+# Arrange the two pie charts next to each other
+
+
+# Create a grobTree for the title with adjusted margins
+title1 <- grobTree(
+  rectGrob(gp = gpar(col = NA), height = unit(1.5, "lines"), y = 0.5),
+  textGrob(
+    "TMM Purchases from January 2023 to June 2023",
+    gp = gpar(fontsize = 14),
+    vjust = 1
+  )
+)
+
+# Create textGrobs for the labels with adjusted vertical position
+label_p1 <- textGrob(paste0("Purchasing: ", round(sum(tmm_data$Percentage[1:8]), 2), "%"), y = unit(1.3, "npc"))
+label_p2 <- textGrob(paste0("Planning: ", round(tmm_data$Percentage[tmm_data$Equipment=="Others"], 2), "%"), y = unit(1.2, "npc"))
+
+
+# Arrange the plots side by side with a common title and footer
+grid.arrange(
+  top = title1,
+  p1, p2,
+  heights = c(0.9, 0.1),
+  label_p1, label_p2,
+  ncol = 2
+#  bottom = 
+)
+
+  
+```
+
+
+
+
+## Conclusion
+
+TMM is doing well with its plan to purchase medical equipment by the middle of 2023. We're making good work and are on track to purchase more than `r paste0(100-round(tmm_data$Percentage[9], 2), "%")` of our annual budget in 2023, which is what our plan calls for. We are still committed to making smart investments in medical equipment so that we can give people the best care possible.
+
+
