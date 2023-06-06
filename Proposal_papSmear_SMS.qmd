@@ -1,23 +1,27 @@
 ---
-title: "Proposal for Communication Strategies to Improve Cervical Cancer Screening in Somaliland"
-author: "Dr Tex and Dr Omar"
+title: "Strategies to Improve Cervical Cancer Screening in Somaliland"
+#author: "Dr Tex and Dr Omar"
 format: pdf
+header-includes:
+  - \usepackage{sectsty}
+  - \allsectionsfont{\Large}
 ---
-Dear Dr. Fatima,
+\large Dear Dr. Fatima,
 
-We are writing to propose three communication strategies with the potential to improve women’s participation in cervical cancer screening in Somaliland:
+\large We are writing to propose three communication strategies with the potential to improve women’s participation in cervical cancer screening in Somaliland:
 
-1. **In-person communication and information material at health centers:** Health centers can provide in-person communication and information material to women visiting the center. This can include brochures, posters, **A4 notes from HGH HIS at OPD**, and other informational materials that explain the importance of cervical cancer screening and how to get screened.
+1. **In-person communication and information material at Hargeisa Group Hospital (HGH):** This can include brochures, posters, **A4 notes from HGH HIS at OPD**, and other informational materials that explain the importance of cervical cancer screening and how to get screened. It is also important to **involve husbands in the conversation** about cervical cancer screening as their support can play a crucial role in encouraging women to attend screenings.
 
 2. Verbal communication through seminars and workshops: Seminars and workshops can be organized to educate women about their risk of cancer and the importance of screening. These events can be held in community centers, schools, or other public spaces and can be led by healthcare professionals such as **Jessica from Taiwan Technique Mission**.
 
-3. **Better recall through SMS (Telesom or Somtel) written in Somali languages:** A system can be set up to send reminders to women through SMS written in their native language. These reminders can include information about when their next screening is due and how to schedule an appointment.
+3. **Better recall through SMS (Telesom or Somtel) written in Somali languages:** A system can be set up to send reminders to women through SMS. These reminders can include information about how to attend a screening, and when their next screening is due.
 
 4. **Offering breast ultrasound and pap smear together during a screening campaign** can provide women with the opportunity to have two important health screenings at the same time. This can be more convenient for women and may encourage them to attend the screening. Additionally, offering multiple screenings together can help to raise awareness about the importance of regular health check-ups and preventative care.
 
-These strategies aim to increase awareness about cervical cancer screening and its importance among women in Somaliland. By providing information through multiple channels and in a culturally sensitive manner, we hope to improve women's participation in cervical cancer screening.
+These strategies aim to increase awareness about health check-ups and its importance among women in Somaliland. By providing information through multiple channels and in a culturally sensitive manner, we hope to improve women's participation in screening campaign.
 
-Thank you for considering our proposal.
+\large Thank you for considering our proposal.
 
-Sincerely,
-Dr. Tex, Dr. Omar, and Dr. Dave
+\large Sincerely,
+
+Dr. Tex, Dr. Omar, and Dr. Dave (7th June 2023)
