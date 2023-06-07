@@ -1,7 +1,9 @@
 ---
-title: "Strategies to Improve Blood Donation in Somaliland"
+title: "2023 World Blood Donor Day in Somaliland"
 author: "Dr. Tex and Dr. Omar"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
+header-includes:
+- \usepackage{pdfpages}
 output: 
   pdf_document:
     latex_engine: xelatex
@@ -9,19 +11,52 @@ output:
 
 # Introduction
 
-Blood donation is a critical component of healthcare systems, providing life-saving treatments for a variety of conditions. However, many countries, particularly those in sub-Saharan Africa, face challenges in maintaining a safe and sufficient blood supply. In order to improve blood safety and availability, innovative intervention strategies must be developed and implemented.
+<!-- On June 14, 2023, World Blood Donor Day will be celebrated to thank voluntary blood donors and promote universal access to safe blood transfusion. Despite 80 million units of blood being donated annually worldwide, only 38% is collected in developing countries where over 80% of the population lives. In Africa, blood donation rates are low due to fears of anemia and health risks, and lack of information. Somaliland also faces a shortage of safe blood due to lack of resources and societal barriers. Regular blood donations from volunteers are needed to meet the growing demand for blood in Somaliland.-->
 
-# Background
-
+On 14 June 2023, World Blood Donor Day will again be celebrated throughout the world. Officially designated as an annual event by the World Health Assembly in 2005, the Day provides a special opportunity to celebrate and thank voluntary blood donors around the world for their gift of blood and has become a major focus for action towards achieving universal access to safe blood transfusion.
+From an estimated 80,000,000 units of blood donated annually worldwide, only 38% is collected in the developing countries where over 80% of populations live.
+According to studies done in Africa, the prevalence of blood donation ranges from 10.64% to 61.69% in which the majority of blood donation practice prevalence lays lower than 30%. Studies in different parts of the world identify factors that hinder blood donation practice. Such perceptions include being not fitted to give blood, fear of anemia, fear of different health risks, and lack of information about blood donation.
 Somaliland also faces a shortage of safe blood for transfusion. This shortage is due to a variety of factors, including a lack of resources for blood collection and storage, as well as societal barriers to blood donation.
+Every single donation is a precious lifesaving gift and repeat donation is the key to building a safe and sustainable blood supply.
+Blood donation is a novel act of lifesaving practice for people who face blood loss due to road traffic accidents, gunshot, surgery, pregnancy complications, and diseases like malaria, anemia, and intestinal parasites which increase the demand for blood
+Since there is too much demand for blood, there is not enough blood, which causes a lot of illness and death. Regular blood donations from volunteers are needed to meet the growing demand for blood in Somaliland and keep the blood supply at a good level.
+
+
+<!--Blood donation is a critical component of healthcare systems, providing life-saving treatments for a variety of conditions. However, many countries, particularly those in sub-Saharan Africa, face challenges in maintaining a safe and sufficient blood supply. In order to improve blood safety and availability, innovative intervention strategies must be developed and implemented.-->
+
+
+# Project Plan for World Blood Donor Day in Hargeisa
+The slogan for 2023 World Blood Donor Day campaign is ***Give blood, give plasma, share life, share often***.  It focuses on patients requiring life-long transfusion support and underlines the role every single person can play, by giving the valuable gift of blood. It also highlights the importance of giving blood regularly to create a safe and sustainable supply of blood and blood products for timely treatment.
+
+# On 14 June 2023 in Hargeisa Group Hospital, and the University of Hargeisa
+**ISBTWBDD2023** and **ISBTClinical**
+
 
 # Strategies
 
 There are several strategies that can be implemented to improve blood donation in Somaliland. These include:
 
-- **Education and awareness campaigns:** Raising awareness about the importance of blood donation and dispelling myths and misconceptions can help to increase the number of voluntary blood donors.
-- **Community engagement:** Engaging with community leaders and organizations can help to promote blood donation and encourage more people to donate. One example of a community engagement initiative is the blood donation campaign planned for **World Blood Donor Day on 14 June 2023** at the Blood Bank of Hargeisa Group Hospital. To attract donors to this event, several methods could be used, such as sending SMS messages to potential donors, promoting the event on social media platforms, displaying large posters in public spaces, running radio or television advertisements, using word-of-mouth promotion through community organizations or religious groups.
-- **Incentives:** People can be encouraged to give blood through free health checks, small gifts (like multivitamin tablets), recognition, or small rewards.
+- **Education and awareness campaigns:** Raising awareness about the importance of blood donation and dispelling myths and misconceptions can help to increase the number of voluntary blood donors. For instance, some women and their husbands think that women are unable to donate blood because they lose blood every month. Misconceptions that need to be broken include: **women's blood is dirty**.
+- **Community engagement:** Engaging with community leaders and organizations can help to promote blood donation and encourage more people to donate. One example of a community engagement initiative is the blood donation campaign planned for **World Blood Donor Day on 14 June 2023** at the Blood Bank of Hargeisa Group Hospital. To attract donors to this event, several methods could be used, such as sending SMS messages to potential donors (e.g., medical students in the ***University of Hargeisa***, ***soldiers*** who stay in Hargeisa Group Hospital, HGH), promoting the event on social media platforms (e.g., a ***video clip from Sheikh, Dr. Asker, Dr. Ahmed, and director of Blood Bank of HGH***), displaying large posters in public spaces (slogan: ***Give blood, give plasma, share life, share often***), running radio or television advertisements, using word-of-mouth promotion through community organizations or religious groups.
+- **Incentives:** People can be encouraged to give blood through free health checks (such as HBV/HCV status then vaccination), small gifts (like multivitamin tablets, water and refreshment), recognition, or small rewards.
+
+# Materials and Methods in Campaign
+- Questionnaire
+-	Screening kits to detect transfusion transmissible infections (HIV,HBV,HCV and syphilis and quick iron level) with blood group typing
+- Equipment of vital signs measurement (blood pressure monitor x2, pulse rate, body temperature x2 and weight x2)
+-	Blood bags and needles
+-	Syringes, test tubes
+-	Refreshment cookies and drinks for donors
+- computer + project + screen
+- T-short + hat x 100
+
+
+# Workflow of Blood Donation (staffs)
+-	Registration (2+5)
+-	Medical history and mini-physical (1+4)
+-	Blood donation (2+5)
+-	Resting and refreshments (1+1)
+
 
 # Conclusion
 
@@ -29,3 +64,9 @@ Improving blood donation in Somaliland will require a multi-faceted approach tha
 
 <!-- : Safe blood supply in sub-Saharan Africa: challenges and opportunities - The Lancet Haematology Series | Haematological Care Priorities in sub-Saharan Africa | Volume 8, ISSUE 10, e770-e776, October 2021 -->
 
+<!--#| message: false-->
+```{r}
+#| echo: false
+knitr::asis_output("\\includepdf[pages=-]{/mnt/c/Users/User/Downloads/NBS_DonorClinicalRecordFormv6Jan2021_and_questionare.pdf}")
+
+```
