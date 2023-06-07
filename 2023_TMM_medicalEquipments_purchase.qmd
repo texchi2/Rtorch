@@ -1,8 +1,12 @@
 ---
 title: "2023 TMM Purchase Plan"
 author: "Taiwan Medical Mission (TMM) in the Republic of Somaliland"
-format: pdf
+output: 
+  pdf_document:
+    latex_engine: xelatex
 ---
+<!--format: pdf -->
+
 ## Subject
 We're writing to provide you with an update on TMM's capacity-building and medical affairs tasks since 2023. We will highlight our attempts to make informed and reasonable decisions regarding this topic as well as our progress in adhering to our annual budget for investing in medical equipment.
 
