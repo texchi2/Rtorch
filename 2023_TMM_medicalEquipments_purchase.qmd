@@ -6,6 +6,7 @@ output:
     latex_engine: xelatex
 ---
 <!--format: pdf -->
+<!-- https://www.indiamart.com/proddetail/infant-radiant-warmer-nice-2007-s-i-sense-technology-23860937273.html; infant warmer with phototherapy -->
 
 ## Subject
 We're writing to provide you with an update on TMM's capacity-building and medical affairs tasks since 2023. We will highlight our attempts to make informed and reasonable decisions regarding this topic as well as our progress in adhering to our annual budget for investing in medical equipment.
