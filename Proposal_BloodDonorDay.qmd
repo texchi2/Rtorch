@@ -64,9 +64,9 @@ Improving blood donation in Somaliland will require a multi-faceted approach tha
 
 <!-- : Safe blood supply in sub-Saharan Africa: challenges and opportunities - The Lancet Haematology Series | Haematological Care Priorities in sub-Saharan Africa | Volume 8, ISSUE 10, e770-e776, October 2021 -->
 
-<!--#| message: false-->
+<!--#| message: false; /mnt/c/Users/User/Downloads/-->
 ```{r}
 #| echo: false
-knitr::asis_output("\\includepdf[pages=-]{/mnt/c/Users/User/Downloads/NBS_DonorClinicalRecordFormv6Jan2021_and_questionare.pdf}")
+knitr::asis_output("\\includepdf[pages=-]{NBS_DonorClinicalRecordFormv6Jan2021_and_questionare.pdf}")
 
 ```
