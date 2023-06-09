@@ -1,21 +1,24 @@
 ---
 title: "TMU_monogram"
-format: docx
+format: html
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
 ## Project decription
 
 The project proposal aims to propose a nomogram to predict the possibility of malignant transformation of oral potentially malignant disorders into oral squamous cell carcinoma. The proposed nomogram will take into account several variables, including age, gender, the kind of oral mucosa lesion, and its anatomic location in the oral cavity (lip, buccal, tongue, gingiva, floor of mouth, palate, retromolar trigon), the histology grade of dysplasia (severe, moderate, mild), and previous oral cancer (yes or no). Additionally, the expression levels of genes YAP1 and TP53, CK-13, and CK-17 will be estimated to determine their impact on the possibility of malignant transformation in the future (1, 3, 5, and 10 years). This nomogram will provide a reliable and practical model for clinically predicting the probability of malignant transformation of oral potentially malignant disorders into oral squamous cell carcinoma.
 
+## A monogram
+
+A nomogram is a graphical representation of a statistical model that allows the estimation of an outcome by aligning values of predictors on different scales. In the case of predicting malignant transformation of oral potentially malignant disorders, a nomogram can be used to estimate the probability of malignant transformation based on the values of various predictor variables, such as age, gender, the kind of oral mucosa lesion, and its anatomic location in the oral cavity, the histology grade of dysplasia, and previous oral cancer.
+
 ```{r}
 #| echo: false
+#| message: false
 
 # Load the required libraries
 library(rms)
+library(ggplot2)
 
 # Set the seed for reproducibility
 set.seed(123)
@@ -23,11 +26,11 @@ set.seed(123)
 # Generate demo data
 n <- 1000
 age <- rnorm(n, 50, 10)
-gender <- factor(sample(c('Male', 'Female'), n, replace = TRUE))
-lesion <- factor(sample(c('Leukoplakia', 'Erythroplakia', 'Lichen planus'), n, replace = TRUE))
-location <- factor(sample(c('Lip', 'Buccal', 'Tongue', 'Gingiva', 'Floor of mouth', 'Palate', 'Retromolar trigon'), n, replace = TRUE))
-dysplasia <- factor(sample(c('Mild', 'Moderate', 'Severe'), n, replace = TRUE))
-cancer_history <- factor(sample(c('Yes', 'No'), n, replace = TRUE))
+gender <- factor(sample(c(1, 0), n, replace = TRUE), labels = c('Male', 'Female'))
+lesion <- factor(sample(c(0, 2, 1), n, replace = TRUE), labels = c('Leukoplakia', 'Erythroplakia', 'Lichen planus'))
+location <- factor(sample(c(0, 1, 4, 3, 6, 2, 5), n, replace = TRUE), labels= c('Lip', 'Buccal', 'Tongue', 'Gingiva', 'Floor of mouth', 'Palate', 'Retromolar trigon'))
+dysplasia <- factor(sample(c(0, 1, 2, 3), n, replace = TRUE), labels = c('None', 'Mild', 'Moderate', 'Severe'))
+cancer_history <- factor(sample(c(1, 0), n, replace = TRUE), labels = c('Yes', 'No'))
 yap1 <- rnorm(n, 0.5, 0.1)
 tp53 <- rnorm(n, 0.5, 0.1)
 ck13 <- rnorm(n, 0.5, 0.1)
@@ -42,11 +45,65 @@ ddist <- datadist(data)
 options(datadist = "ddist")
 
 # Fit a logistic regression model
-fit <- lrm(transformation ~ age + gender + lesion + location + dysplasia + cancer_history + yap1 + tp53 + ck13 + ck17, data = data)
+# fit <- lrm(transformation ~ age + gender + lesion + location + dysplasia + cancer_history + yap1 + tp53 + ck13 + ck17, data = data)
+
+fit <- lrm(transformation ~ cancer_history + yap1 + tp53 + ck13 + ck17, data = data)
 
 # Create a nomogram
-nomogram(fit)
+nom <- nomogram(fit, fun=function(x)1/(1+exp(-x)),
+    fun.at=c(.001,.01,.05,seq(.1,.9,by=.1),.95,.99,.999),
+    funlabel="Risk of Cancer (%)")
+
+
+plot(nom, xfrac=.6)
+
+
+
+# Draw vertical lines (isopleths) to make a prediction for a patient with specific predictor values (no missing data)
+patient_data <- data.frame(age=54,
+                          gender='Male',
+                          lesion='Leukoplakia',
+                          location='Tongue',
+                          dysplasia='Severe',
+                          cancer_history='Yes',
+                          yap1=0.4,
+                          tp53=0.5,
+                          ck13=0.2,
+                          ck17=0.2)
+
+points_data <- predict(fit,
+                       patient_data,
+                       type='fitted.ind')
+                       #, se.fit=TRUE, conf.int=.95)
+
+
+total_points <- sum(points_data)
+
+abline(v=points_data,
+       col='red',
+       lty=2)
+
+abline(v=total_points,
+       col='green',
+       lty=1)
 
 ```
+
+## Proposed parallel-scale nomogram with isopleth
+
+
+To use a nomogram for predicting malignant transformation of oral potentially malignant disorders, you would first need to have a nomogram that has been developed and validated based on data from a study. Once you have a nomogram, you can use it to make predictions by following these steps:
+
+1. Identify the values of the predictor variables for the individual or group you want to make a prediction for. For example, you would need to know their age, gender, the kind of oral mucosa lesion they have, its anatomic location in the oral cavity, the histology grade of dysplasia, and whether they have had previous oral cancer.
+
+2. Locate the scales for each predictor variable on the nomogram and find the position on each scale that corresponds to the value of that predictor variable for the individual or group.
+
+3. Draw a line from each position on the predictor variable scales to the points axis to determine the number of points associated with each predictor value.
+
+4. Sum up the points from all predictor variables to obtain a total points score.
+
+5. Locate the total points score on the points axis and draw a line from that position to the probability axis to determine the estimated probability of malignant transformation.
+
+The resulting probability is an estimate of the likelihood that an individual or group with those specific predictor values will experience malignant transformation of oral potentially malignant disorders. It is important to note that this is only an estimate and may not accurately predict the outcome for every individual or group.
 
 <!-- The `echo: false` option disables the printing of code (only output is displayed).-->
