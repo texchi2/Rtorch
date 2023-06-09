@@ -1,0 +1,48 @@
+---
+title: "TMU_monogram"
+format: docx
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Project decription
+
+The project proposal aims to propose a nomogram to predict the possibility of malignant transformation of oral potentially malignant disorders into oral squamous cell carcinoma. The proposed nomogram will take into account several variables, including age, gender, the kind of oral mucosa lesion, and its anatomic location in the oral cavity (lip, buccal, tongue, gingiva, floor of mouth, palate, retromolar trigon), the histology grade of dysplasia (severe, moderate, mild), and previous oral cancer (yes or no). Additionally, the expression levels of genes YAP1 and TP53, CK-13, and CK-17 will be estimated to determine their impact on the possibility of malignant transformation in the future (1, 3, 5, and 10 years). This nomogram will provide a reliable and practical model for clinically predicting the probability of malignant transformation of oral potentially malignant disorders into oral squamous cell carcinoma.
+
+```{r}
+#| echo: false
+
+# Load the required libraries
+library(rms)
+
+# Set the seed for reproducibility
+set.seed(123)
+
+# Generate demo data
+n <- 1000
+age <- rnorm(n, 50, 10)
+gender <- factor(sample(c('Male', 'Female'), n, replace = TRUE))
+lesion <- factor(sample(c('Leukoplakia', 'Erythroplakia', 'Lichen planus'), n, replace = TRUE))
+location <- factor(sample(c('Lip', 'Buccal', 'Tongue', 'Gingiva', 'Floor of mouth', 'Palate', 'Retromolar trigon'), n, replace = TRUE))
+dysplasia <- factor(sample(c('Mild', 'Moderate', 'Severe'), n, replace = TRUE))
+cancer_history <- factor(sample(c('Yes', 'No'), n, replace = TRUE))
+yap1 <- rnorm(n, 0.5, 0.1)
+tp53 <- rnorm(n, 0.5, 0.1)
+ck13 <- rnorm(n, 0.5, 0.1)
+ck17 <- rnorm(n, 0.5, 0.1)
+transformation <- sample(c(0, 1), n, replace = TRUE)
+
+# Combine the data into a data frame
+data <- data.frame(age, gender, lesion, location, dysplasia, cancer_history, yap1, tp53, ck13, ck17, transformation)
+
+# Fit a logistic regression model
+fit <- lrm(transformation ~ age + gender + lesion + location + dysplasia + cancer_history + yap1 + tp53 + ck13 + ck17, data = data)
+
+# Create a nomogram
+nomogram(fit)
+
+```
+
+<!-- The `echo: false` option disables the printing of code (only output is displayed).-->
