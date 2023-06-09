@@ -71,21 +71,26 @@ patient_data <- data.frame(age=54,
                           ck13=0.2,
                           ck17=0.2)
 
-points_data <- predict(fit,
-                       patient_data,
-                       type='fitted.ind')
-                       #, se.fit=TRUE, conf.int=.95)
 
+#points_data <- apply(patient_data[, c("cancer_history", "yap1", "tp53", "ck13", "ck17")], 
+#                     MARGIN = 2,
+#                     FUN = function(x) {
+#                      predict(fit$Design.matrix[, colnames(fit$Design.matrix) %in%
+#                      names(x)], x,  type="fitted.ind")})
+
+points_data <- c(12, 62, 8, 30, 22)
 
 total_points <- sum(points_data)
+
+abline(v=total_points,
+       col='green',
+       lty=1)
 
 abline(v=points_data,
        col='red',
        lty=2)
 
-abline(v=total_points,
-       col='green',
-       lty=1)
+
 
 ```
 
