@@ -37,6 +37,10 @@ transformation <- sample(c(0, 1), n, replace = TRUE)
 # Combine the data into a data frame
 data <- data.frame(age, gender, lesion, location, dysplasia, cancer_history, yap1, tp53, ck13, ck17, transformation)
 
+# Specify the distributional properties of the variables
+ddist <- datadist(data)
+options(datadist = "ddist")
+
 # Fit a logistic regression model
 fit <- lrm(transformation ~ age + gender + lesion + location + dysplasia + cancer_history + yap1 + tp53 + ck13 + ck17, data = data)
 
