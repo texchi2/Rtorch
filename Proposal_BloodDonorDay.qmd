@@ -2,13 +2,13 @@
 title: "2023 World Blood Donor Day in Somaliland"
 author: "Dr. Tex and Dr. Omar"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
-header-includes:
-- \usepackage{pdfpages}
 output: 
   pdf_document:
     latex_engine: xelatex
 ---
-
+<!-- header-includes:
+- \usepackage{pdfpages}
+-->
 # Introduction
 
 <!-- On June 14, 2023, World Blood Donor Day will be celebrated to thank voluntary blood donors and promote universal access to safe blood transfusion. Despite 80 million units of blood being donated annually worldwide, only 38% is collected in developing countries where over 80% of the population lives. In Africa, blood donation rates are low due to fears of anemia and health risks, and lack of information. Somaliland also faces a shortage of safe blood due to lack of resources and societal barriers. Regular blood donations from volunteers are needed to meet the growing demand for blood in Somaliland.-->
@@ -18,7 +18,7 @@ From an estimated 80,000,000 units of blood donated annually worldwide, only 38%
 According to studies done in Africa, the prevalence of blood donation ranges from 10.64% to 61.69% in which the majority of blood donation practice prevalence lays lower than 30%. Studies in different parts of the world identify factors that hinder blood donation practice. Such perceptions include being not fitted to give blood, fear of anemia, fear of different health risks, and lack of information about blood donation.
 Somaliland also faces a shortage of safe blood for transfusion. This shortage is due to a variety of factors, including a lack of resources for blood collection and storage, as well as societal barriers to blood donation.
 Every single donation is a precious lifesaving gift and repeat donation is the key to building a safe and sustainable blood supply.
-Blood donation is a novel act of lifesaving practice for people who face blood loss due to road traffic accidents, gunshot, surgery, pregnancy complications, and diseases like malaria, anemia, and intestinal parasites which increase the demand for blood
+Blood donation is a novel act of lifesaving practice for people who face blood loss due to road traffic accidents, surgery, pregnancy complications, and diseases like malaria, anemia, dengue fever, and intestinal parasites which increase the demand for blood
 Since there is too much demand for blood, there is not enough blood, which causes a lot of illness and death. Regular blood donations from volunteers are needed to meet the growing demand for blood in Somaliland and keep the blood supply at a good level.
 
 
@@ -31,6 +31,9 @@ The slogan for 2023 World Blood Donor Day campaign is ***Give blood, give plasma
 # On 14 June 2023 in Hargeisa Group Hospital, and the University of Hargeisa
 **ISBTWBDD2023** and **ISBTClinical**
 
+```{=tex}
+\clearpage
+```
 
 # Strategies
 
