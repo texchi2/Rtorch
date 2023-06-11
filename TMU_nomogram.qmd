@@ -1,0 +1,152 @@
+---
+title: "Integrating Multi-Omic Data to Predict Oral Premalignant Diseases: A Machine Learning Approach"
+format: html
+output: word_document
+bibliography: references_deepLearning.bib
+csl: nature.csl
+---
+<!-- https://www.zotero.org/styles?q=nature-->
+
+## Project description
+The project is to discover a prediction model for oral premalignant diseases (OPDs) through studying among genetics, proteomics, and cellular/histologic levels. By using salivary exosome proteins, GWAS SNP, gene expression of YAP1/FAT1, and deep learning for pathology analysis, the project aim is to propose a nomogram to predict the possibility of malignant transformation of oral potentially malignant disorders into oral squamous cell carcinoma. The proposed nomogram will take into account several variables, including age, gender, the kind of oral mucosa lesion, and its anatomic location in the oral cavity (lip, buccal, tongue, gingiva, floor of mouth, palate, retromolar trigon), the histology grade of dysplasia (severe, moderate, mild), and previous oral cancer (yes or no). Additionally, the expression levels of genes YAP1/FAT1 interplay, TP53, CK-13, and CK-17 will be estimated to determine their impact on the possibility of malignant transformation in the future (1, 3, 5, and 10 years). This nomogram will provide a reliable and practical model for clinically predicting the probability of malignant transformation of oral potentially malignant disorders into oral squamous cell carcinoma.
+
+## Subproject: deep learning for digital pathology
+Deep learning techniques can be applied to analyze histopathological images of oral lesions by using convolutional neural networks (CNNs), which are a type of artificial neural network of machine learning methods that can learn to extract features from images and classify them into different categories.
+Deep learning models can capture complex features and patterns that are not easily detected by human observers by using multiple layers of artificial neurons, each of which performs a nonlinear transformation on the input from the previous layer. This allows the CNN to learn hierarchical representations of the images, from low-level features such as edges and textures, to high-level features such as shapes and structures. These features can help the CNN to distinguish between normal and abnormal cells or tissues, as well as different types of oral lesions with their genetic alterations.
+
+For example, a deep learning model can be trained to predict RNA-Seq expression of tumors from whole slide images, which can reflect gene mutations or epigenomic modifications that cause massive changes in gene expression[@ren_deep_2023]. The model can also spatialize the gene expression, as validated by immunohistochemistry (ICH) staining on an independent dataset[@ren_deep_2023]. This can provide insights into the molecular mechanisms and targets of carcinogenesis[@ren_deep_2023].
+
+
+```{=tex}
+\clearpage
+```
+
+
+## Proposed parallel-scale nomogram 
+
+
+A nomogram is a graphical representation of a statistical model that allows the estimation of an outcome by aligning values of predictors on different scales. In the case of predicting malignant transformation of oral potentially malignant disorders, a nomogram can be used to estimate the probability of malignant transformation based on the values of various predictor variables, such as age, gender, the kind of oral mucosa lesion, and its anatomic location in the oral cavity, the histology grade of dysplasia, and previous oral cancer, as well as some features discovered from deep learning algorithms.
+
+```{r}
+#| echo: false
+#| message: false
+
+# Load the required libraries
+library(rms)
+library(ggplot2)
+
+# Set the seed for reproducibility
+set.seed(123)
+
+# Generate demo data
+n <- 1000
+age <- rnorm(n, 50, 10)
+gender <- factor(sample(c(1, 0), n, replace = TRUE), labels = c('Male', 'Female'))
+lesion <- factor(sample(c(0, 2, 1), n, replace = TRUE), labels = c('Leukoplakia', 'Erythroplakia', 'Lichen planus'))
+location <- factor(sample(c(0, 1, 4, 3, 6, 2, 5), n, replace = TRUE), labels= c('Lip', 'Buccal', 'Tongue', 'Gingiva', 'Floor of mouth', 'Palate', 'Retromolar trigon'))
+dysplasia <- factor(sample(c(0, 1, 2, 3), n, replace = TRUE), labels = c('None', 'Mild', 'Moderate', 'Severe'))
+cancer_history <- factor(sample(c(1, 0), n, replace = TRUE), labels = c('Yes', 'No'))
+yap1 <- rnorm(n, 0.5, 0.1)
+tp53 <- rnorm(n, 0.5, 0.1)
+ck13 <- rnorm(n, 0.5, 0.1)
+ck17 <- rnorm(n, 0.5, 0.1)
+transformation <- sample(c(0, 1), n, replace = TRUE)
+
+# Combine the data into a data frame
+data <- data.frame(age, gender, lesion, location, dysplasia, cancer_history, yap1, tp53, ck13, ck17, transformation)
+
+# Specify the distributional properties of the variables
+ddist <- datadist(data)
+options(datadist = "ddist")
+
+# Fit a logistic regression model
+# fit <- lrm(transformation ~ age + gender + lesion + location + dysplasia + cancer_history + yap1 + tp53 + ck13 + ck17, data = data)
+
+fit <- lrm(transformation ~ cancer_history + yap1 + tp53 + ck13 + ck17, data = data)
+
+# Create a nomogram
+nom <- nomogram(fit, fun=function(x)1/(1+exp(-x)),
+    fun.at=c(.001,.01,.05,seq(.1,.9,by=.1),.95,.99,.999),
+    funlabel="Risk of Cancer (%)")
+
+
+plot(nom, xfrac=.6)
+
+
+
+# Draw vertical lines (isopleths) to make a prediction for a patient with specific predictor values (no missing data)
+patient_data <- data.frame(age=54,
+                          gender='Male',
+                          lesion='Leukoplakia',
+                          location='Tongue',
+                          dysplasia='Severe',
+                          cancer_history='Yes',
+                          yap1=0.4,
+                          tp53=0.5,
+                          ck13=0.2,
+                          ck17=0.2)
+
+
+#points_data <- apply(patient_data[, c("cancer_history", "yap1", "tp53", "ck13", "ck17")], 
+#                     MARGIN = 2,
+#                     FUN = function(x) {
+#                      predict(fit$Design.matrix[, colnames(fit$Design.matrix) %in%
+#                      names(x)], x,  type="fitted.ind")})
+
+points_data <- c(12, 62, 8, 30, 22)
+
+total_points <- sum(points_data)
+
+abline(v=total_points,
+       col='green',
+       lty=1)
+
+abline(v=points_data,
+       col='red',
+       lty=2)
+
+
+
+```
+
+## Drawing isopleth
+
+
+To use a nomogram for predicting malignant transformation of oral potentially malignant disorders, you would first need to have a nomogram that has been developed and validated based on data from a study. Once you have a nomogram, you can use it to make predictions by following these steps:
+
+1. Identify the values of the predictor variables for the individual or group you want to make a prediction for. For example, you would need to know their age, gender, the kind of oral mucosa lesion they have, its anatomic location in the oral cavity, the histology grade of dysplasia, and whether they have had previous oral cancer.
+
+2. Locate the scales for each predictor variable on the nomogram and find the position on each scale that corresponds to the value of that predictor variable for the individual or group.
+
+3. Draw a line from each position on the predictor variable scales to the points axis to determine the number of points associated with each predictor value.
+
+4. Sum up the points from all predictor variables to obtain a total points score.
+
+5. Locate the total points score on the points axis and draw a line from that position to the probability axis to determine the estimated probability of malignant transformation.
+
+The resulting probability is an estimate of the likelihood that an individual or group with those specific predictor values will experience malignant transformation of oral potentially malignant disorders. 
+
+<!--It is important to note that this is only an estimate and may not accurately predict the outcome for every individual or group.-->
+
+
+
+
+## Clinical scenario to use the nomogram
+
+
+A nomogram is a graphical tool that can combine multiple sources of information, such as clinical, histological, genetic, and proteomic data, and use advanced computational algorithms to provide individualized predictions of outcomes. By using a nomogram, clinicians can tailor the management of OPDs according to the probability of malignant transformation. This can improve the early detection, personalized treatment, and prognosis of OPDs, as well as reduce the burden and cost of unnecessary or excessive interventions.
+
+For example, a patient with a low probability of transformation may benefit from less frequent follow-ups (e.g., every 3 to 6 months) and fewer invasive biopsies, while a patient with a high probability of transformation may require closer monitoring (e.g., every one month) and early intervention. A nomogram can also guide the choice of surgical treatment, such as the optimal size of the ***precision safety margin*** (e.g., 2mm, 5mm, or even 8mm) for excisional biopsies, which can vary depending on the risk level of the patient.
+
+
+
+<!--With this probability of nomogram, the clinical decision making could be much objective instead of subjective experience. In less risk patients, physician could safely let them follow ups every 3 to 6 months, and doesn't need frequent invasive biopsies. On the other hand, in higher risk patients, they should be monitored closely such as every 1 month or even weekly. Early incisional biopsies or larger safety margin of excisional biopsies could be best choice for them.
+By using the resulting probability of nomogram model, it can enable early detection, personalized treatment, or better prognosis for patients with OPDs, as well as reduce the burden and cost of invasive biopsies and control a proper size of surgical treatment plan (i.e., a ***precision safety margin***, about 2mm, 5mm, or even 10mm).
+
+Because of the project will reveal the feasibility and utility of a prediction model for OPDs that combines multiple sources of information and leverages advanced computational algorithms, the precision safety margin could be conducted in a personalized treatment manner.-->
+
+
+## Conclusion
+
+In conclusion, this project will develop and validate a nomogram that can provide individualized predictions of the probability of malignant transformation of OPDs into OSCC. This nomogram will combine multiple sources of information, such as clinical, histological, genetic, and proteomic data, and use advanced computational algorithms to generate accurate and reliable estimates. This nomogram will be a useful tool for clinicians to tailor the management of OPDs according to the risk level of each patient, and to improve the early detection, personalized treatment, and prognosis of oral cancer.
+
