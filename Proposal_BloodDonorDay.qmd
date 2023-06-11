@@ -9,6 +9,8 @@ output:
 <!-- header-includes:
 - \usepackage{pdfpages}
 -->
+
+
 # Introduction
 
 <!-- On June 14, 2023, World Blood Donor Day will be celebrated to thank voluntary blood donors and promote universal access to safe blood transfusion. Despite 80 million units of blood being donated annually worldwide, only 38% is collected in developing countries where over 80% of the population lives. In Africa, blood donation rates are low due to fears of anemia and health risks, and lack of information. Somaliland also faces a shortage of safe blood due to lack of resources and societal barriers. Regular blood donations from volunteers are needed to meet the growing demand for blood in Somaliland.-->
@@ -25,11 +27,15 @@ Since there is too much demand for blood, there is not enough blood, which cause
 <!--Blood donation is a critical component of healthcare systems, providing life-saving treatments for a variety of conditions. However, many countries, particularly those in sub-Saharan Africa, face challenges in maintaining a safe and sufficient blood supply. In order to improve blood safety and availability, innovative intervention strategies must be developed and implemented.-->
 
 
-# Project Plan for World Blood Donor Day in Hargeisa
-The slogan for 2023 World Blood Donor Day campaign is ***Give blood, give plasma, share life, share often***.  It focuses on patients requiring life-long transfusion support and underlines the role every single person can play, by giving the valuable gift of blood. It also highlights the importance of giving blood regularly to create a safe and sustainable supply of blood and blood products for timely treatment.
+<!--# Project Plan for World Blood Donor Day in Hargeisa
+The slogan for 2023 World Blood Donor Day campaign is ***Give blood, give plasma, share life, share often***.  It focuses on patients requiring life-long transfusion support and underlines the role every single person can play, by giving the valuable gift of blood. It also highlights the importance of giving blood regularly to create a safe and sustainable supply of blood and blood products for timely treatment.-->
+
+
+![**ISBTWBDD2023** **ISBTClinical**](wbdd-2023-banner.png){width=600}
+
 
 # On 14 June 2023 in Hargeisa Group Hospital, and the University of Hargeisa
-**ISBTWBDD2023** and **ISBTClinical**
+
 
 ```{=tex}
 \clearpage
