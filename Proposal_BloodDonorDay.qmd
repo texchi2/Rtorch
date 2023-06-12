@@ -46,8 +46,8 @@ The slogan for 2023 World Blood Donor Day campaign is ***Give blood, give plasma
 There are several strategies that can be implemented to improve blood donation in Somaliland. These include:
 
 - **Education and awareness campaigns:** Raising awareness about the importance of blood donation and dispelling myths and misconceptions can help to increase the number of voluntary blood donors. For instance, some women and their husbands think that women are unable to donate blood because they lose blood every month. Misconceptions that need to be broken include: **women's blood is dirty**.
-- **Community engagement:** Engaging with community leaders and organizations can help to promote blood donation and encourage more people to donate. One example of a community engagement initiative is the blood donation campaign planned for **World Blood Donor Day on 14 June 2023** at the Blood Bank of Hargeisa Group Hospital. To attract donors to this event, several methods could be used, such as sending SMS messages to potential donors (e.g., medical students in the ***University of Hargeisa***, ***soldiers*** who stay in Hargeisa Group Hospital, HGH), promoting the event on social media platforms (e.g., a ***video clip from Sheikh, Dr. Asker, Dr. Ahmed, and director of Blood Bank of HGH***), displaying large posters in public spaces (slogan: ***Give blood, give plasma, share life, share often***), running radio or television advertisements, using word-of-mouth promotion through community organizations or religious groups.
-- **Incentives:** People can be encouraged to give blood through free health checks (such as HBV/HCV status then vaccination), small gifts (like multivitamin tablets, water and refreshment), recognition, or small rewards.
+- **Community engagement:** Engaging with community leaders and organizations can help to promote blood donation and encourage more people to donate. One example of a community engagement initiative is the blood donation campaign planned for **World Blood Donor Day on 14 June 2023** at the Blood Bank of Hargeisa Group Hospital. To attract donors to this event, several methods could be used, such as sending SMS messages to potential donors (e.g., medical students in the ***University of Hargeisa***, who stay in Hargeisa Group Hospital, HGH), promoting the event on social media platforms (e.g., a ***video clip from Sheikh, Dr. Asker, Dr. Ahmed, and director of Blood Bank of HGH***), displaying large posters in public spaces (slogan: ***Give blood, give plasma, share life, share often***), running radio or television advertisements, using word-of-mouth promotion through community organizations or religious groups.
+- **Incentives:** People can be encouraged to give blood through free health checks (such as ***Oral Health*** check campaign, HBV/HCV check then vaccination), small gifts (like multivitamin tablets, water and refreshment), recognition, or small rewards.
 
 # Materials and Methods in Campaign
 - Questionnaire
@@ -56,15 +56,22 @@ There are several strategies that can be implemented to improve blood donation i
 -	Blood bags and needles
 -	Syringes, test tubes
 -	Refreshment cookies and drinks for donors
-- computer + project + screen
-- T-short + hat x 100
+- T-short + hat x 50
 
 
 # Workflow of Blood Donation (staffs)
+- two sites: HGH Blood Bank + main campus of University of Hargeisa
 -	Registration (2+5)
 -	Medical history and mini-physical (1+4)
 -	Blood donation (2+5)
 -	Resting and refreshments (1+1)
+
+
+# Workflow of Oral Health check (staffs)
+- computer + project + screen
+- ultrasound for head and neck examination
+- tongue depressor + penlight
+- Dr. Tex Chi + Dr. Omar + Dr. Fadumo
 
 
 # Conclusion
