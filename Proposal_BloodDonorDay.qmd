@@ -10,6 +10,8 @@ output:
 - \usepackage{pdfpages}
 -->
 
+![**ISBTWBDD2023** **ISBTClinical**](wbdd-2023-banner.png){width=600}
+
 
 # Introduction
 
@@ -31,8 +33,6 @@ Since there is too much demand for blood, there is not enough blood, which cause
 The slogan for 2023 World Blood Donor Day campaign is ***Give blood, give plasma, share life, share often***.  It focuses on patients requiring life-long transfusion support and underlines the role every single person can play, by giving the valuable gift of blood. It also highlights the importance of giving blood regularly to create a safe and sustainable supply of blood and blood products for timely treatment.-->
 
 
-![**ISBTWBDD2023** **ISBTClinical**](wbdd-2023-banner.png){width=600}
-
 
 # On 14 June 2023 in Hargeisa Group Hospital, and the University of Hargeisa
 
@@ -42,6 +42,10 @@ The slogan for 2023 World Blood Donor Day campaign is ***Give blood, give plasma
 ```
 
 # Strategies
+
+
+![**Blood is Love**](Blood_logo-1.png){width=100}
+
 
 There are several strategies that can be implemented to improve blood donation in Somaliland. These include:
 
@@ -55,6 +59,8 @@ There are several strategies that can be implemented to improve blood donation i
 - Equipment of vital signs measurement (blood pressure monitor x2, pulse rate, body temperature x2 and weight x2)
 -	Blood bags and needles
 -	Syringes, test tubes
+- Blood screening test kits
+- Blood bags storage (up to 42 days)
 -	Refreshment cookies and drinks for donors
 - T-short + hat x 50
 
