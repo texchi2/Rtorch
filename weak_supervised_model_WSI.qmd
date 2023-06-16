@@ -106,9 +106,114 @@ You will also need to set `num_epochs` to the desired number of training epochs.
 
 Please note that this script is just a starting point and may require further modifications and fine-tuning to fit your specific needs.
 
+
+## R Torch
+pytorch could be translated to R, by chatGPT 3.5 engine
+https://analytica.shinyapps.io/codelingo/
+
 ```{r}
 #| echo: false
-2 * 2
+
+library(torch)
+library(torchvision)
+
+# Set the device to run on
+device <- torch_device(ifelse(torch_cuda_is_available(), "cuda", "cpu"))
+
+# Load the pretrained inception-ResNet-v2 model
+model <- torchvision_models_inception_v3(pretrained = TRUE)
+
+# Replace the last layer with a custom layer for our specific task
+num_classes <- 2 # number of classes in our dataset
+model$fc <- torch_nn_Linear(model$fc$in_features, num_classes)
+
+# Move the model to the device
+model$to(device)
+
+# Set the loss function
+criterion <- torch_nn_CrossEntropyLoss()
+
+# Set the optimizer
+optimizer <- torch_optim_Adam(model$parameters(), lr = 0.0002, weight_decay = 1e-5)
+
+# Set the batch size
+batch_size <- 299
+
+# Set the number of validation epochs before early stopping
+early_stopping_epochs <- 20
+
+# Set the number of patches before checkpointing
+checkpoint_patches <- 100000
+
+# Initialize variables for early stopping and checkpointing
+best_val_loss <- Inf
+val_loss_increases <- 0
+
+for (epoch in 1:num_epochs) {
+  # Train the model on the training dataset
+  model$train()
+  for (i in 1:length(train_dataloader)) {
+    # Move the inputs and labels to the device
+    inputs <- train_dataloader[[i]][[1]]$to(device)
+    labels <- train_dataloader[[i]][[2]]$to(device)
+    
+    # Zero the gradients
+    optimizer$zero_grad()
+    
+    # Forward pass
+    outputs <- model(inputs)
+    loss <- criterion(outputs, labels)
+    
+    # Backward pass and optimization step
+    loss$backward()
+    optimizer$step()
+    
+    # Checkpoint the model every checkpoint_patches patches
+    if ((i + 1) %% checkpoint_patches == 0) {
+      # Evaluate the model on the validation dataset
+      model$eval()
+      with(torch_no_grad(), {
+        val_loss <- 0.0
+        for (j in 1:length(val_dataloader)) {
+          # Move the inputs and labels to the device
+          val_inputs <- val_dataloader[[j]][[1]]$to(device)
+          val_labels <- val_dataloader[[j]][[2]]$to(device)
+          
+          # Forward pass
+          val_outputs <- model(val_inputs)
+          val_loss <- val_loss + criterion(val_outputs, val_labels)$item()
+        }
+      })
+      
+      # Calculate the average validation loss
+      val_loss <- val_loss / length(val_dataloader)
+      
+      # Check for early stopping
+      if (val_loss < best_val_loss) {
+        best_val_loss <- val_loss
+        val_loss_increases <- 0
+        
+        # Save the best model so far
+        torch_save(model$state_dict(), "best_model.pth")
+      } else {
+        val_loss_increases <- val_loss_increases + 1
+        
+        if (val_loss_increases >= early_stopping_epochs) {
+          print("Early stopping")
+          break
+        }
+      }
+    }
+  }
+  
+  if (val_loss_increases >= early_stopping_epochs) {
+    break
+  }
+}
+
+# Load the best model for evaluation on the test set
+model$load_state_dict(torch_load("best_model.pth"))
+
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
