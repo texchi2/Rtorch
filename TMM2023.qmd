@@ -1,0 +1,17 @@
+---
+title: "TMM2023"
+format: pdf
+---
+
+```{=latex}
+\begin{frame}{Pap Smear Screening Plan for Women's Public Health}
+\begin{itemize}
+    \item \textbf{Objective}: Conduct pap smear tests for 1,000 women in Somaliland by an OB/GYN specialist.
+    \item \textbf{Preparation}: Key consumables sent by Wanfang Hospital. HGH OB/GYN clinic and pathology lab prepared for testing. Requested support from Wanfang Hospital pathology department for telepathology.
+    \item \textbf{Sustainability}: If the process goes smoothly, continue to provide relevant consumables to increase screening capacity and expand from the hospital to the entire city.
+    \item \textbf{Expectation}: Become a national public health policy in the future. Early detection of precancerous lesions of the cervix and reduction of the incidence and mortality of cervical cancer.
+\end{itemize}
+\end{frame}
+```
+
+
