@@ -1,6 +1,6 @@
 ---
-title: "Strategies to Improve Cervical Cancer Screening in Somaliland"
-#author: "Dr Tex and Dr Omar"
+title: "The call to action: changing the world’s approach to cervical cancer and a WHO flagship initiative"
+#author: "Dr. Dave, Dr. Tex and Dr. Omar"
 output: 
   pdf_document:
     latex_engine: xelatex
@@ -10,19 +10,29 @@ output:
   - \allsectionsfont{\Large} -->
 Dear Dr. Fatima,
 
-We are writing to propose three communication strategies with the potential to improve women’s participation in cervical cancer screening in Somaliland:
+We are writing to propose three communication strategies with the potential to improve women’s participation in cervical cancer screening in Somaliland, following the 2021 WHO recommendation of cervical cancer prevention:
 
-1. **In-person communication and information material at Hargeisa Group Hospital (HGH):** This can include brochures, posters, **A5-sized notes from HGH HIS at OPD**, and other informational materials that explain the importance of cervical cancer screening and how to get screened. It is also important to **involve husbands in the conversation** about cervical cancer screening as their support can play a crucial role in encouraging women to attend screenings.
+1. **In-person communication and information material at Hargeisa Group Hospital (HGH)**: This can include brochures, ***posters***, A5-sized notes from HGH HIS at OPD, and other informational materials that explain the importance of cervical cancer screening, how to get screened with both ***HPV DNA test and Pap smear***, and the benefits of vaccination against HPV. It is also important ***to involve husbands*** in the conversation about cervical cancer screening as their support can play a crucial role in encouraging women to attend screenings. For HPV DNA test, it could also be ***self-sampling at home*** for their convenience.
 
-2. **Better recall through SMS (Telesom or Somtel) written in Somali languages:** A system can be set up to send reminders to women through SMS. These reminders can include information about ***how to attend a screening***, recall for ***further therapy in case with abnormal findings*** of pap smear, and when their ***next screening*** is due. We could also promote the event on social media platforms, displaying large posters in public spaces, running radio or television advertisements, using **word-of-mouth promotion** through community organizations or religious groups.
+2. **Better recall through SMS (Telesom or Somtel) written in Somali languages**: A system can be set up to send reminders to women through SMS. These reminders can include information about how to attend a screening, recall for further therapy in case with abnormal findings of HPV DNA test or Pap smear, and when their next screening is due. ***Follow-up*** with women who have had screenings can lead to referrals to experts, additional triage testing, or treatment. We could also promote the event on social media platforms, displaying large posters in public spaces, running radio or television advertisements, using ***word-of-mouth promotion*** through community organizations or religious groups.
 
-3. **Incentives:** People can be encouraged to attend screenings through free health checks, small gifts (like multivitamin tablets), recognition, or small rewards.
+3. **Incentives**: People can be encouraged to attend screenings through free health checks, small gifts (like multivitamin tablets), recognition, or small rewards.
 
-4. **Offering breast ultrasound and pap smear together during a screening campaign** can provide women with the opportunity to have two important health screenings at the same time. This can be more convenient for women and may encourage them to attend the screening. Additionally, offering multiple screenings together can help to raise awareness about the importance of regular health check-ups and preventative care.
+<!--4. **Offering breast ultrasound and pap smear together during a screening campaign** can provide women with the opportunity to have two important health screenings at the same time. This can be more convenient for women and may encourage them to attend the screening. Additionally, offering multiple screenings together can help to raise awareness about the importance of regular health check-ups and preventative care.
+**Patient recall:** Implementing a system for recalling patients who have undergone a pap smear test with abnormal findings can help to ensure that they receive appropriate follow-up care and therapy.-->
 
-<!--4. **Patient recall:** Implementing a system for recalling patients who have undergone a pap smear test with abnormal findings can help to ensure that they receive appropriate follow-up care and therapy.-->
+4. **Verbal communication through seminars and workshops**: Seminars and workshops can be organized to educate women about their risk of cancer and the importance of screening. These events can be held in community centers, schools, or other public spaces and can be led by healthcare professionals such as *Jessica from Taiwan Technique Mission*.
 
-5. Verbal communication through seminars and workshops: Seminars and workshops can be organized to educate women about their risk of cancer and the importance of screening. These events can be held in community centers, schools, or other public spaces and can be led by healthcare professionals such as *Jessica from Taiwan Technique Mission*.
+
+By implementing the following strategies, the cervical cancer screening campaign can become a ***sustainable initiative***:
+
+1. **Collaboration with local organizations**: Partnering with local organizations, such as women’s groups, health clinics, and community centers, can help to ensure that the campaign is culturally sensitive and tailored to the needs of the local population. These organizations can also help to promote the campaign and encourage women to attend screenings.
+
+2. **Training of healthcare professionals**: Training healthcare professionals, such as doctors, nurses, and community health workers, on the importance of cervical cancer screening and how to perform HPV DNA tests and Pap smears can help to ensure that women receive high-quality care. This can also help to build trust between healthcare providers and the community.
+
+3. **Data collection and analysis**: Collecting data on the number of women who attend screenings, the results of their tests, and any follow-up care they receive can help to evaluate the effectiveness of the campaign and identify areas for improvement. This data can also be used to inform future campaigns and guide decision-making from ***policymakers*** of Somaliland.
+
+4. **Funding**: Securing long-term funding for the campaign can help to ensure its sustainability. This can include funding from government agencies, international organizations, or private donors.
 
 
 These strategies aim to increase awareness about health check-ups and its importance among women in Somaliland. By providing information through multiple channels and in a culturally sensitive manner, we hope to improve women's participation in screening campaign.
@@ -33,3 +43,18 @@ Sincerely,
 
 
 Dr. Tex, Dr. Omar, and Dr. Dave (7th June 2023)
+
+
+<!-- comments 
+There are several international organizations that may be potential funders for cervical cancer prevention initiatives. Some of these organizations include:
+
+- **World Health Organization (WHO)**: The WHO has a Cervical Cancer Elimination Initiative that aims to eliminate cervical cancer as a public health problem¹.
+- **Prevent Cancer Foundation**: The Prevent Cancer Foundation offers Global Grants for projects that aim to improve awareness, screenings, and treatment for cervical and breast cancer in low- and middle-income countries².
+- **European Society for Medical Oncology (ESMO)**: ESMO offers research funding opportunities for projects related to gynaecological malignancies, including cervical cancer³.
+
+These organizations may be able to provide funding and support for your cervical cancer screening campaign in Somaliland.
+
+Source: Conversation with Bing, 24/06/2023(1) Cervical Cancer Elimination Initiative - World Health Organization (WHO). https://www.who.int/initiatives/cervical-cancer-elimination-initiative Accessed 24/06/2023.
+(2) Global Grants – Prevent Cancer Foundation. https://www.preventcancer.org/programs/our-global-reach/global-grants/ Accessed 24/06/2023.
+(3) Cancer Research Grants & Funding | Foundations | Europe | EU - ESMO. https://www.esmo.org/research/research-funding-opportunities/other-research-funding-opportunities/national-research-funds Accessed 24/06/2023.
+-->
