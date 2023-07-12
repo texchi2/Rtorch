@@ -1,6 +1,6 @@
 
 ---
-title: "2023 Collaborating for Better Health: A Multi-Specialty Conference Handbook"
+#title: "2023 Collaborating for Better Health: A Multi-Specialty Conference Handbook"
 format: 
   html:
     pandoc:
@@ -13,7 +13,7 @@ format:
 \usepackage{hyperref}
 \usepackage{svg}
 \usepackage{pdfpages}
-\usepackage{tikz}
+%\usepackage{tikz}
 
 %Here is an example of a LaTeX script that you can use as a starting point for creating the conference handbook for your Taiwan-Somaliland Medical Conference in August 2023:
 
@@ -34,18 +34,21 @@ format:
 
 %\begin{center}
 \hspace*{-0.7cm}%
-\begin{tikzpicture} % tikzfigure
+
+\begin{figure} % tikzfigure
 %\begin{minipage}[b]{1\linewidth}
 
 \includesvg[height=3.0cm, distort=false]{Flag_of_the_Republic_of_China.svg}
-\hspace{1.4cm}
+\hspace{3.4cm}
 %\includesvg[width=0.17\linewidth]{TMM_logo.svg}
 %\hspace{3cm}
 \includesvg[height=3.0cm, distort=false]{Flag_of_Somaliland.svg}
+
 %\captionof{Figure}{xx}
 %\end{minipage}
-\end{tikzpicture}
-    \vspace{4cm}
+\end{figure}
+
+\vspace{4cm}
     
 \centering
     {\Huge\bfseries % Taiwan---Somaliland \\
